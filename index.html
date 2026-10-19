@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+html,body{margin:0;height:100%;background:#000;overflow:hidden}
+a{color:#69F09B}a:hover{color:#EDF2F4}
+@keyframes hvPulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+</style>
+</helmet>
+<div style="position:fixed;inset:0;background:#000;overflow:hidden;user-select:none;-webkit-user-select:none">
+<div style="position:absolute;left:{{ offX }}px;top:{{ offY }}px;width:1920px;height:1080px;transform:scale({{ scale }});transform-origin:0 0;display:flex;background:#0B1014;font-family:Sora,system-ui,sans-serif;color:#EDF2F4;overflow:hidden">
+
+<!-- LEFT: media / map -->
+<div data-screen-label="Left media zone" style="position:relative;width:1200px;height:1080px;flex:none;overflow:hidden;background:#0B1014">
+
+  <div style="position:absolute;inset:0;opacity:{{ mediaOp }};transition:opacity .6s ease">
+    <sc-for list="{{ ads }}" as="ad" hint-placeholder-count="1">
+      <div style="position:absolute;inset:0;opacity:{{ ad.op }};transition:opacity 1s ease;display:flex;flex-direction:column">
+        <sc-if value="{{ ad.isTenant }}" hint-placeholder-val="{{ true }}">
+          <div style="position:relative;height:640px;flex:none;background:#151E24">
+            <image-slot id="{{ ad.slot }}" shape="rect" placeholder="{{ ad.ph }}" src="{{ ad.img }}" credit="{{ ad.credit }}"></image-slot>
+          </div>
+          <div style="flex:1;padding:56px 72px 120px;display:flex;flex-direction:column;gap:22px;background:#0B1014">
+            <div style="font-size:24px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#69F09B">{{ ad.eyebrow }}</div>
+            <div style="font-size:64px;line-height:1.05;font-weight:600;letter-spacing:-.02em;text-wrap:balance">{{ ad.head }}</div>
+            <div style="font-size:30px;line-height:1.4;color:#B9C5CC;text-wrap:pretty;max-width:960px">{{ ad.body }}</div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ ad.isPsa }}" hint-placeholder-val="{{ false }}">
+          <div style="position:relative;flex:1;padding:120px 88px 140px;display:flex;flex-direction:column;justify-content:flex-end;gap:32px;background:#0E161B;overflow:hidden">
+            <div style="position:absolute;left:0;right:0;top:0;height:620px">
+              <image-slot id="{{ ad.slot }}" shape="rect" placeholder="{{ ad.ph }}" src="{{ ad.img }}" credit="{{ ad.credit }}"></image-slot>
+            </div>
+            <div style="position:absolute;left:0;right:0;top:300px;height:330px;background:linear-gradient(rgba(14,22,27,0),#0E161B);pointer-events:none"></div>
+            <div style="position:relative;display:flex;align-items:center;gap:16px;font-size:26px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#69F09B">
+              <div style="width:18px;height:18px;border-radius:50%;background:#69F09B"></div>{{ ad.eyebrow }}
+            </div>
+            <div style="position:relative;font-size:84px;line-height:1.02;font-weight:600;letter-spacing:-.03em;text-wrap:balance;max-width:1000px">{{ ad.head }}</div>
+            <div style="position:relative;font-size:32px;line-height:1.45;color:#C9D3D8;text-wrap:pretty;max-width:900px">{{ ad.body }}</div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-for>
+    <div style="position:absolute;left:72px;right:72px;bottom:48px;display:flex;align-items:center;gap:24px;pointer-events:none">
+      <div style="font-size:22px;font-weight:500;color:#9AA8B1;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">{{ adCounter }}</div>
+      <div style="flex:1;display:flex;gap:10px">
+        <sc-for list="{{ adDots }}" as="d" hint-placeholder-count="6">
+          <div style="flex:1;height:5px;border-radius:3px;background:{{ d.bg }};transition:background .4s"></div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:absolute;inset:0;opacity:{{ mapOp }};transition:opacity .6s ease;pointer-events:none;background:#0B1014">
+    <div style="position:absolute;left:64px;right:64px;top:52px;display:flex;align-items:flex-start;justify-content:space-between;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="height:56px;padding:0 24px;border-radius:28px;background:#69F09B;color:#0B1014;font-size:28px;font-weight:700;display:flex;align-items:center">{{ mapFloorLabel }}</div>
+          <div style="font-size:28px;color:#C9D3D8">{{ mapFloorSub }}</div>
+        </div>
+      </div>
+      <div style="text-align:right;display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:40px;font-weight:600;letter-spacing:-.01em">{{ mapDestName }}</div>
+        <div style="font-size:26px;color:#9AA8B1">{{ mapDestMeta }}</div>
+      </div>
+    </div>
+    <div style="position:absolute;left:40px;right:40px;top:170px;height:760px;perspective:2400px;display:flex;align-items:center;justify-content:center">
+      <div style="position:relative;width:1120px;height:640px;transform:rotateX({{ tilt }}deg);transform-origin:50% 60%;transition:transform .6s ease">
+        <svg viewBox="0 0 2100 1200" width="1120" height="640" style="overflow:visible;display:block">
+          <rect x="20" y="34" width="2060" height="1160" rx="28" style="fill:#060A0D"></rect>
+          <rect x="20" y="20" width="2060" height="1160" rx="28" style="fill:#18222A;stroke:#2C3A44;stroke-width:6"></rect>
+          <sc-for list="{{ rooms }}" as="r" hint-placeholder-count="0">
+            <g style="opacity:{{ r.op }};transition:opacity .4s">
+              <rect x="{{ r.x }}" y="{{ r.sy }}" width="{{ r.w }}" height="{{ r.h }}" rx="8" style="fill:{{ r.side }}"></rect>
+              <rect x="{{ r.x }}" y="{{ r.y }}" width="{{ r.w }}" height="{{ r.h }}" rx="8" style="fill:{{ r.fill }};stroke:{{ r.stroke }};stroke-width:3;transition:fill .4s"></rect>
+            </g>
+          </sc-for>
+          <polyline points="{{ routePts }}" style="fill:none;stroke:#0B1014;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;opacity:{{ routeOp }};stroke-dasharray:{{ routeLen }};stroke-dashoffset:{{ routeOff }};transition:{{ routeTr }}"></polyline>
+          <polyline points="{{ routePts }}" style="fill:none;stroke:#69F09B;stroke-width:16;stroke-linecap:round;stroke-linejoin:round;opacity:{{ routeOp }};stroke-dasharray:{{ routeLen }};stroke-dashoffset:{{ routeOff }};transition:{{ routeTr }}"></polyline>
+          <sc-if value="{{ showKiosk }}" hint-placeholder-val="{{ false }}">
+            <g>
+              <circle cx="250" cy="1060" r="26" style="fill:#69F09B;transform-box:fill-box;transform-origin:center;animation:hvPulse 2s ease-out infinite"></circle>
+              <circle cx="250" cy="1060" r="26" style="fill:#EDF2F4;stroke:#0B1014;stroke-width:6"></circle>
+              <circle cx="250" cy="1060" r="12" style="fill:#3A8656"></circle>
+              <rect x="300" y="1036" width="250" height="50" rx="25" style="fill:#EDF2F4"></rect>
+              <text x="425" y="1069" style="font-family:Sora,sans-serif;font-size:24px;font-weight:700;fill:#0B1014;text-anchor:middle">You are here</text>
+            </g>
+          </sc-if>
+          <sc-if value="{{ showElevStart }}" hint-placeholder-val="{{ false }}">
+            <g>
+              <circle cx="560" cy="1000" r="24" style="fill:#EDF2F4;stroke:#0B1014;stroke-width:6"></circle>
+              <rect x="604" y="976" width="280" height="50" rx="25" style="fill:#EDF2F4"></rect>
+              <text x="744" y="1009" style="font-family:Sora,sans-serif;font-size:24px;font-weight:700;fill:#0B1014;text-anchor:middle">Exit elevator</text>
+            </g>
+          </sc-if>
+          <sc-if value="{{ showPin }}" hint-placeholder-val="{{ false }}">
+            <g>
+              <circle cx="{{ pinX }}" cy="{{ pinY }}" r="30" style="fill:#69F09B;transform-box:fill-box;transform-origin:center;animation:hvPulse 1.6s ease-out infinite"></circle>
+              <circle cx="{{ pinX }}" cy="{{ pinY }}" r="30" style="fill:#0B1014;stroke:#EDF2F4;stroke-width:8"></circle>
+              <circle cx="{{ pinX }}" cy="{{ pinY }}" r="12" style="fill:#69F09B"></circle>
+            </g>
+          </sc-if>
+        </svg>
+        <sc-for list="{{ rooms }}" as="r" hint-placeholder-count="0">
+          <div style="position:absolute;left:{{ r.cxPx }}px;top:{{ r.cyPx }}px;width:{{ r.wPx }}px;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;pointer-events:none;opacity:{{ r.op }};transition:opacity .4s">
+            <div style="font-size:{{ r.fsPx }}px;font-weight:600;line-height:1.1;color:{{ r.tc }};text-wrap:balance">{{ r.label }}</div>
+            <div style="font-size:12px;font-weight:500;color:{{ r.tc2 }}">{{ r.num }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="position:absolute;left:64px;right:64px;bottom:48px;display:flex;align-items:center;gap:40px;font-size:24px;color:#C9D3D8">
+      <div style="display:flex;align-items:center;gap:12px"><div style="width:22px;height:22px;border-radius:50%;background:#EDF2F4;box-shadow:0 0 0 5px #3A8656 inset"></div>You are here</div>
+      <div style="display:flex;align-items:center;gap:12px"><div style="width:22px;height:22px;border-radius:50%;background:#0B1014;box-shadow:0 0 0 5px #EDF2F4 inset"></div>Destination</div>
+      <div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:10px;border-radius:5px;background:#69F09B"></div>Your route</div>
+      <div style="flex:1"></div>
+      <div style="color:#9AA8B1">Map not to scale</div>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT: interaction -->
+<div data-screen-label="Right interaction zone" style="position:relative;width:720px;height:1080px;flex:none;background:#111A20;box-shadow:-1px 0 0 rgba(237,242,244,.08);display:flex;flex-direction:column;overflow:hidden">
+  <div style="padding:44px 48px 28px;display:flex;flex-direction:column;gap:28px;flex:none">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <img src="assets/HoverVerse_Logomark_Horizontal_Light.svg" alt="HoverVerse" style="height:34px;display:block">
+      <div style="text-align:right">
+        <div style="font-size:34px;font-weight:600;line-height:1">{{ timeStr }}</div>
+        <div style="font-size:20px;color:#9AA8B1;margin-top:6px">{{ dateStr }}</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:46px;font-weight:600;letter-spacing:-.02em;line-height:1.1">17230 Dallas Parkway</div>
+      <div style="font-size:24px;color:#9AA8B1;margin-top:8px">Bent Tree · Dallas, TX 75248</div>
+    </div>
+  </div>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+      <div style="padding:0 48px 16px;display:flex;gap:10px;flex:none">
+        <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="4">
+          <div data-hv="1" onClick="{{ tb.select }}" style="height:64px;padding:0 24px;border-radius:32px;display:flex;align-items:center;font-size:24px;font-weight:600;background:{{ tb.bg }};color:{{ tb.fg }};box-shadow:{{ tb.ring }};transition:background .3s,color .3s;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">{{ tb.label }}</div>
+        </sc-for>
+      </div>
+      <div style="position:relative;flex:1;min-height:0;overflow:hidden">
+        <div style="display:flex;height:100%;width:2880px;transform:translateX({{ trackX }}px);transition:transform .5s cubic-bezier(.2,.8,.2,1)">
+          <sc-for list="{{ pages }}" as="pg" hint-placeholder-count="1">
+            <div ref="{{ pg.ref }}" onScroll="{{ pg.onScroll }}" style="width:720px;height:100%;flex:none;overflow:hidden;box-sizing:border-box;padding:8px 48px 40px;display:flex;flex-direction:column;gap:12px">
+              <sc-for list="{{ pg.items }}" as="it" hint-placeholder-count="5">
+                <div data-hv="1" onClick="{{ it.open }}" style="flex:none;height:108px;box-sizing:border-box;padding:0 24px 0 20px;border-radius:20px;background:#18232B;display:flex;align-items:center;gap:22px;cursor:pointer;transition:background .2s" style-hover="background:#1F2E37;box-shadow:0 0 0 3px #69F09B inset">
+                  <div style="width:68px;height:68px;flex:none;border-radius:16px;background:{{ it.tileBg }};color:{{ it.tileFg }};display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700">{{ it.mono }}</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:28px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ it.name }}</div>
+                    <div style="font-size:22px;color:#9AA8B1;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ it.cat }}</div>
+                  </div>
+                  <div style="text-align:right;flex:none">
+                    <div style="font-size:24px;font-weight:600">{{ it.suiteLabel }}</div>
+                    <div style="font-size:22px;color:#9AA8B1;margin-top:4px">{{ it.levelLabel }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+        <div style="position:absolute;left:0;right:0;top:0;height:56px;background:linear-gradient(#111A20,rgba(17,26,32,0));opacity:{{ upOp }};transition:opacity .3s;pointer-events:none"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:110px;background:linear-gradient(rgba(17,26,32,0),#111A20 70%);opacity:{{ downOp }};transition:opacity .3s;pointer-events:none;display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;box-sizing:border-box">
+          <div style="font-size:22px;color:#C9D3D8;display:flex;align-items:center;gap:10px">
+            <svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:#69F09B;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M12 4v16M5 13l7 7 7-7"></path></svg>
+            Wave down for more
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isTenant }}" hint-placeholder-val="{{ false }}">
+    <div style="flex:1;min-height:0;padding:0 48px 32px;display:flex;flex-direction:column;gap:28px">
+      <div data-hv="1" onClick="{{ goHome }}" style="flex:none;align-self:flex-start;height:64px;padding:0 28px 0 18px;border-radius:32px;background:#18232B;display:flex;align-items:center;gap:10px;font-size:24px;font-weight:600;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">
+        <svg width="26" height="26" viewBox="0 0 24 24" style="fill:none;stroke:#EDF2F4;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M15 5l-7 7 7 7"></path></svg>Directory
+      </div>
+      <div style="display:flex;align-items:center;gap:26px">
+        <div style="width:112px;height:112px;flex:none;border-radius:26px;background:{{ selTileBg }};color:{{ selTileFg }};display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:700">{{ selMono }}</div>
+        <div style="min-width:0">
+          <div style="font-size:48px;font-weight:600;line-height:1.08;letter-spacing:-.02em;text-wrap:balance">{{ selName }}</div>
+          <div style="font-size:24px;color:#9AA8B1;margin-top:8px">{{ selCat }}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px">
+        <div style="height:56px;padding:0 24px;border-radius:28px;background:#69F09B;color:#0B1014;display:flex;align-items:center;font-size:24px;font-weight:700">{{ selSuite }}</div>
+        <div style="height:56px;padding:0 24px;border-radius:28px;background:#18232B;display:flex;align-items:center;font-size:24px;font-weight:600">{{ selLevel }}</div>
+      </div>
+      <div style="font-size:26px;line-height:1.5;color:#C9D3D8;text-wrap:pretty">{{ selDesc }}</div>
+      <div style="display:grid;grid-template-columns:140px 1fr;row-gap:16px;font-size:24px">
+        <div style="color:#9AA8B1">Hours</div><div>{{ selHours }}</div>
+        <div style="color:#9AA8B1">Phone</div><div>{{ selPhone }}</div>
+      </div>
+      <div style="flex:1"></div>
+      <div data-hv="1" onClick="{{ startRoute }}" style="flex:none;height:112px;border-radius:28px;background:#69F09B;color:#0B1014;display:flex;align-items:center;justify-content:center;gap:16px;font-size:34px;font-weight:700;cursor:pointer" style-hover="background:#8AF5B2;box-shadow:0 0 0 6px rgba(105,240,155,.25)">
+        Show me the way
+        <svg width="34" height="34" viewBox="0 0 24 24" style="fill:none;stroke:#0B1014;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isRoute }}" hint-placeholder-val="{{ false }}">
+    <div style="flex:1;min-height:0;padding:0 48px 32px;display:flex;flex-direction:column;gap:20px">
+      <div data-hv="1" onClick="{{ backToTenant }}" style="flex:none;align-self:flex-start;height:64px;padding:0 28px 0 18px;border-radius:32px;background:#18232B;display:flex;align-items:center;gap:10px;font-size:24px;font-weight:600;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">
+        <svg width="26" height="26" viewBox="0 0 24 24" style="fill:none;stroke:#EDF2F4;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M15 5l-7 7 7 7"></path></svg>Back
+      </div>
+      <div>
+        <div style="font-size:22px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#69F09B">Directions to</div>
+        <div style="font-size:40px;font-weight:600;letter-spacing:-.02em;line-height:1.1;margin-top:8px;text-wrap:balance">{{ selName }}</div>
+        <div style="font-size:24px;color:#C9D3D8;margin-top:12px">{{ routeSummary }}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+          <div style="flex:none;display:flex;align-items:flex-start;gap:18px;padding:12px 18px;border-radius:18px;background:{{ st.bg }};transition:background .4s,opacity .4s;opacity:{{ st.op }}">
+            <div style="width:44px;height:44px;flex:none;border-radius:50%;background:{{ st.nBg }};color:{{ st.nFg }};display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700">{{ st.n }}</div>
+            <div style="font-size:24px;line-height:1.35;padding-top:6px;text-wrap:pretty">{{ st.text }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="flex:1"></div>
+      <sc-if value="{{ multiFloor }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:none;display:flex;gap:12px">
+          <div data-hv="1" onClick="{{ viewL1 }}" style="flex:1;height:72px;border-radius:22px;background:{{ l1Bg }};color:{{ l1Fg }};display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">Level 1</div>
+          <div data-hv="1" onClick="{{ viewL2 }}" style="flex:1;height:72px;border-radius:22px;background:{{ l2Bg }};color:{{ l2Fg }};display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">Level 2</div>
+        </div>
+      </sc-if>
+      <div style="flex:none;display:flex;gap:12px">
+        <div data-hv="1" onClick="{{ replay }}" style="flex:1;height:88px;border-radius:26px;background:#18232B;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:600;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">Replay route</div>
+        <div data-hv="1" onClick="{{ goHome }}" style="flex:1;height:88px;border-radius:26px;background:#69F09B;color:#0B1014;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;cursor:pointer" style-hover="background:#8AF5B2">Done</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showLegend }}" hint-placeholder-val="{{ true }}">
+    <div style="flex:none;padding:22px 40px 30px;box-shadow:0 -1px 0 rgba(237,242,244,.08);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+      <div style="display:flex;align-items:center;gap:12px;font-size:20px;line-height:1.25;color:#C9D3D8">
+        <svg width="40" height="40" viewBox="0 0 40 40" style="flex:none;fill:none;stroke:#69F09B;stroke-width:2.5"><circle cx="20" cy="20" r="15"></circle><circle cx="20" cy="20" r="4" style="fill:#69F09B;stroke:none"></circle></svg>
+        Point and hold to select
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:20px;line-height:1.25;color:#C9D3D8">
+        <svg width="40" height="40" viewBox="0 0 40 40" style="flex:none;fill:none;stroke:#69F09B;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M4 20h32M11 13l-7 7 7 7M29 13l7 7-7 7"></path></svg>
+        Wave sideways to turn pages
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:20px;line-height:1.25;color:#C9D3D8">
+        <svg width="40" height="40" viewBox="0 0 40 40" style="flex:none;fill:none;stroke:#69F09B;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M20 4v32M13 11l7-7 7 7M13 29l7 7 7-7"></path></svg>
+        Wave up or down to scroll
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="position:absolute;left:50%;top:420px;transform:translate(-50%,0) scale({{ toastScale }});opacity:{{ toastOp }};transition:opacity .25s,transform .25s;pointer-events:none;height:88px;padding:0 36px;border-radius:44px;background:rgba(11,16,20,.92);box-shadow:0 0 0 2px #69F09B,0 20px 60px rgba(0,0,0,.5);display:flex;align-items:center;gap:14px;font-size:30px;font-weight:600;white-space:nowrap">
+    <div style="width:14px;height:14px;border-radius:50%;background:#69F09B"></div>{{ toastText }}
+  </div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;waveGestures&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Gestures&quot;},&quot;showLegend&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Gestures&quot;},&quot;mapTilt&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:30,&quot;min&quot;:0,&quot;max&quot;:50,&quot;step&quot;:1,&quot;unit&quot;:&quot;°&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Map&quot;},&quot;adSeconds&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:8,&quot;min&quot;:3,&quot;max&quot;:30,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;idleSeconds&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:60,&quot;min&quot;:15,&quot;max&quot;:300,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+const HUE = { prairie: 85, cedar: 50, lonestar: 230, helix: 340, mesa: 120, wells: 255, parkline: 190, redbird: 25, kestrel: 300, hoververse: 150 };
+const DEST = [
+  { id: 'cedar', name: 'Cedar & Co. Engineering', mono: 'CC', cat: 'Structural engineering', suite: '102', level: 1, hours: 'Mon–Fri · 7:30 AM – 5:30 PM', phone: '(972) 555-0102', desc: 'Structural and civil engineering for commercial and mixed-use projects across North Texas.' },
+  { id: 'helix', name: 'Helix BioSystems', mono: 'HB', cat: 'Life sciences R&D', suite: '107', level: 1, hours: 'Mon–Fri · 8:00 AM – 6:00 PM', phone: '(972) 555-0107', desc: 'Diagnostics research and assay development. Visitors check in at the front desk inside the suite.' },
+  { id: 'hoververse', name: 'HoverVerse AI', mono: 'HV', cat: 'SurfaceWare™ Experience Center', suite: '250', level: 2, hours: 'Mon–Fri · 9:00 AM – 5:00 PM', phone: '(972) 555-0250', desc: 'Touchless interface technology. See SurfaceWare™ turn walls, tables and displays into interfaces you control by pointing.' },
+  { id: 'kestrel', name: 'Kestrel Freight Logistics', mono: 'KF', cat: 'Supply chain & freight', suite: '240', level: 2, hours: 'Mon–Fri · 7:00 AM – 7:00 PM', phone: '(972) 555-0240', desc: 'Freight brokerage and supply-chain planning for regional and national shippers.' },
+  { id: 'lonestar', name: 'Lonestar Data Labs', mono: 'LD', cat: 'Data & cloud services', suite: '103', level: 1, hours: 'Mon–Fri · 8:00 AM – 5:00 PM', phone: '(972) 555-0103', desc: 'Managed infrastructure, data engineering and quality testing. Includes Lab 106 and QC 104.' },
+  { id: 'mesa', name: 'Mesa Legal Group', mono: 'ML', cat: 'Business & real estate law', suite: '114–119', level: 1, hours: 'Mon–Fri · 8:30 AM – 5:30 PM', phone: '(972) 555-0115', desc: 'Commercial leasing, real estate and business law. Reception is at Suite 115.' },
+  { id: 'parkline', name: 'Parkline Family Dental', mono: 'PD', cat: 'Dentistry', suite: '220', level: 2, hours: 'Mon–Thu · 8:00 AM – 5:00 PM · Fri · 8 – 1', phone: '(972) 555-0220', desc: 'General and cosmetic dentistry for the whole family. New patients welcome.' },
+  { id: 'prairie', name: 'Prairie Light Design Studio', mono: 'PL', cat: 'Architecture & interiors', suite: '100', level: 1, hours: 'Mon–Fri · 9:00 AM – 6:00 PM', phone: '(972) 555-0100', desc: 'Architecture and interior design studio. Our showroom is open to walk-in visitors during business hours.' },
+  { id: 'redbird', name: 'Redbird Insurance Partners', mono: 'RI', cat: 'Commercial insurance', suite: '230', level: 2, hours: 'Mon–Fri · 8:00 AM – 5:00 PM', phone: '(972) 555-0230', desc: 'Independent agency for commercial property, liability and employee benefits.' },
+  { id: 'wells', name: 'Wells Ridge Wealth Advisors', mono: 'WR', cat: 'Financial planning', suite: '210', level: 2, hours: 'Mon–Fri · 8:30 AM – 5:00 PM', phone: '(972) 555-0210', desc: 'Fee-only financial planning and investment management for families and business owners.' }
+];
+const AMEN = [
+  { id: 'conf', name: 'Conference Room', mono: '101', cat: 'Shared · reserve with management', suite: '101', level: 1, hours: 'Daily · 7:00 AM – 9:00 PM', phone: '(972) 555-0001', desc: 'Shared conference room for tenants. Seats 24 with video conferencing.' },
+  { id: 'break', name: 'Break Room', mono: '113', cat: 'Shared kitchen', suite: '113', level: 1, hours: 'Open during building hours', phone: '—', desc: 'Coffee, filtered water, refrigerator and seating.' },
+  { id: 'rest1', name: 'Restrooms', mono: 'WC', cat: 'Women 108 · Men 110', suite: '108 / 110', level: 1, hours: 'Open during building hours', phone: '—', desc: 'Accessible restrooms are located in the center core on every floor.' },
+  { id: 'elev', name: 'Elevators', mono: 'EL', cat: 'To Level 2', suite: 'Lobby', level: 1, hours: 'Always available', phone: '—', desc: 'Elevators are just east of the main lobby.' },
+  { id: 'stairs', name: 'Stairs', mono: 'ST', cat: 'Center core', suite: 'Core', level: 1, hours: 'Always available', phone: '—', desc: 'Stairway in the center core, next to the break room.' },
+  { id: 'lounge', name: 'Tenant Lounge', mono: '260', cat: 'Shared workspace', suite: '260', level: 2, hours: 'Mon–Fri · 7:00 AM – 7:00 PM', phone: '—', desc: 'Drop-in seating, phone booths and Wi-Fi for tenants and guests.' }
+];
+const F1 = [
+  { d: 'prairie', x: 40, y: 40, w: 440, h: 440, label: 'Prairie Light', num: '100', fs: 34 },
+  { d: 'conf', x: 500, y: 40, w: 340, h: 240, label: 'Conference', num: '101', fs: 30 },
+  { d: 'cedar', x: 860, y: 40, w: 420, h: 440, label: 'Cedar & Co.', num: '102', fs: 34 },
+  { d: 'lonestar', x: 1300, y: 40, w: 420, h: 300, label: 'Lonestar Data', num: '103', fs: 34 },
+  { d: 'lonestar', x: 1740, y: 40, w: 320, h: 240, label: 'Quality Ctrl', num: '104', fs: 26 },
+  { d: 'lonestar', x: 1740, y: 300, w: 320, h: 200, label: 'Lab', num: '106', fs: 26 },
+  { s: 1, x: 1300, y: 360, w: 200, h: 120, label: 'Storage', num: '105', fs: 22 },
+  { d: 'cedar', x: 40, y: 500, w: 600, h: 400, label: 'Cedar & Co. Engineering', num: '102 · Open office', fs: 34 },
+  { d: 'helix', x: 660, y: 540, w: 220, h: 200, label: 'Helix Bio', num: '107', fs: 28 },
+  { d: 'rest1', x: 900, y: 540, w: 130, h: 200, label: 'Women', num: '108', fs: 22 },
+  { s: 1, x: 1050, y: 540, w: 70, h: 90, label: '', num: '109', fs: 20 },
+  { s: 1, x: 1130, y: 540, w: 70, h: 90, label: '', num: '111', fs: 20 },
+  { s: 1, x: 1210, y: 540, w: 80, h: 90, label: '', num: '112', fs: 20 },
+  { d: 'rest1', x: 1050, y: 650, w: 240, h: 90, label: 'Men', num: '110', fs: 22 },
+  { d: 'stairs', x: 1310, y: 560, w: 110, h: 180, label: 'Stairs', num: '', fs: 22 },
+  { d: 'break', x: 1440, y: 560, w: 220, h: 200, label: 'Break Room', num: '113', fs: 26 },
+  { d: 'mesa', x: 1000, y: 1000, w: 860, h: 160, label: 'Mesa Legal Group', num: '114–119', fs: 34 },
+  { lobby: 1, x: 40, y: 1000, w: 420, h: 160, label: '', num: '', fs: 26 },
+  { d: 'elev', x: 480, y: 1000, w: 160, h: 160, label: 'Elevators', num: '', fs: 24 }
+];
+const F2 = [
+  { d: 'wells', x: 40, y: 40, w: 560, h: 480, label: 'Wells Ridge', num: '210', fs: 36 },
+  { d: 'parkline', x: 620, y: 40, w: 620, h: 440, label: 'Parkline Dental', num: '220', fs: 36 },
+  { d: 'redbird', x: 1260, y: 40, w: 800, h: 460, label: 'Redbird Insurance', num: '230', fs: 36 },
+  { d: 'kestrel', x: 40, y: 560, w: 560, h: 340, label: 'Kestrel Freight', num: '240', fs: 36 },
+  { d: 'rest2', x: 900, y: 540, w: 130, h: 200, label: 'Women', num: '', fs: 22 },
+  { s: 1, x: 1050, y: 540, w: 240, h: 90, label: '', num: '', fs: 20 },
+  { d: 'rest2', x: 1050, y: 650, w: 240, h: 90, label: 'Men', num: '', fs: 22 },
+  { d: 'stairs2', x: 1310, y: 560, w: 110, h: 180, label: 'Stairs', num: '', fs: 22 },
+  { d: 'hoververse', x: 1700, y: 560, w: 360, h: 600, label: 'HoverVerse AI', num: '250', fs: 34 },
+  { d: 'lounge', x: 1000, y: 1000, w: 680, h: 160, label: 'Tenant Lounge', num: '260', fs: 32 },
+  { lobby: 1, x: 40, y: 1000, w: 420, h: 160, label: 'Elevator Lobby', num: '', fs: 26 },
+  { d: 'elev', x: 480, y: 1000, w: 160, h: 160, label: 'Elevators', num: '', fs: 24 }
+];
+const K = [[250, 1060], [250, 940]];
+const EL = [...K, [560, 940], [560, 1000]];
+const f2 = (...p) => [[560, 1000], [560, 940], ...p];
+const ROUTES = {
+  prairie: { 1: [...K, [250, 490]] },
+  cedar: { 1: [...K, [400, 940], [400, 905]] },
+  lonestar: { 1: [...K, [1700, 940], [1700, 350], [1600, 350]] },
+  helix: { 1: [...K, [770, 940], [770, 748]] },
+  mesa: { 1: [...K, [1430, 940], [1430, 1000]] },
+  conf: { 1: [...K, [490, 940], [490, 290], [670, 290]] },
+  break: { 1: [...K, [1550, 940], [1550, 768]] },
+  rest1: { 1: [...K, [965, 940], [965, 748]] },
+  elev: { 1: EL },
+  stairs: { 1: [...K, [1365, 940], [1365, 748]] },
+  wells: { 1: EL, 2: f2([620, 940], [620, 540], [320, 540], [320, 528]) },
+  parkline: { 1: EL, 2: f2([620, 940], [620, 495], [930, 495], [930, 488]) },
+  redbird: { 1: EL, 2: f2([1680, 940], [1680, 508]) },
+  kestrel: { 1: EL, 2: f2([320, 940], [320, 908]) },
+  hoververse: { 1: EL, 2: f2([1690, 940], [1690, 860]) },
+  lounge: { 1: EL, 2: f2([1340, 940], [1340, 1000]) }
+};
+const STEPS = {
+  prairie: [[1, 'Leave the lobby heading north'], [1, 'Continue straight through the open office'], [1, 'Prairie Light Design Studio, Suite 100, is straight ahead']],
+  cedar: [[1, 'Leave the lobby heading north'], [1, 'Turn right at the main corridor'], [1, 'Cedar & Co. reception, Suite 102, is on your left']],
+  lonestar: [[1, 'Leave the lobby and turn right on the main corridor'], [1, 'Walk past the restrooms and break room'], [1, 'Turn left before the lab and walk north'], [1, 'Lonestar Data Labs, Suite 103, is on your left']],
+  helix: [[1, 'Leave the lobby and turn right on the main corridor'], [1, 'Turn left at the center core'], [1, 'Helix BioSystems, Suite 107, is ahead']],
+  mesa: [[1, 'Leave the lobby and turn right on the main corridor'], [1, 'Continue past the center core'], [1, 'Mesa Legal Group reception, Suite 115, is on your right']],
+  conf: [[1, 'Leave the lobby and turn right'], [1, 'Turn left and walk north along the showroom'], [1, 'Conference Room 101 is on your right']],
+  break: [[1, 'Leave the lobby and turn right on the main corridor'], [1, 'Break Room 113 is on your left past the stairs']],
+  rest1: [[1, 'Leave the lobby and turn right on the main corridor'], [1, 'Restrooms are on your left in the center core']],
+  elev: [[1, 'Leave the lobby and turn right'], [1, 'The elevators are on your right']],
+  stairs: [[1, 'Leave the lobby and turn right on the main corridor'], [1, 'The stairway is on your left in the center core']],
+  wells: [[1, 'Take the elevators just east of the lobby'], [2, 'Exit on Level 2 and turn right'], [2, 'Turn left and walk north'], [2, 'Wells Ridge, Suite 210, is on your left']],
+  parkline: [[1, 'Take the elevators just east of the lobby'], [2, 'Exit on Level 2 and turn right'], [2, 'Walk north, then turn right'], [2, 'Parkline Family Dental, Suite 220, is on your left']],
+  redbird: [[1, 'Take the elevators just east of the lobby'], [2, 'Exit on Level 2 and turn right on the corridor'], [2, 'Turn left at the end and walk north'], [2, 'Redbird Insurance, Suite 230, is ahead']],
+  kestrel: [[1, 'Take the elevators just east of the lobby'], [2, 'Exit on Level 2 and turn left'], [2, 'Kestrel Freight Logistics, Suite 240, is on your right']],
+  hoververse: [[1, 'Take the elevators just east of the lobby'], [2, 'Exit on Level 2 and turn right'], [2, 'Follow the corridor to the east end'], [2, 'HoverVerse AI, Suite 250, is on your left']],
+  lounge: [[1, 'Take the elevators just east of the lobby'], [2, 'Exit on Level 2 and turn right'], [2, 'Tenant Lounge 260 is on your right']]
+};
+const ADS = [
+  { kind: 'tenant', slot: 'ad-parkline', ph: 'Parkline Dental photo', img: 'assets/ads/parkline.jpg', credit: 'Photo: Bjoertvedt · CC BY-SA 3.0', eyebrow: 'Level 2 · Suite 220', head: 'New patients welcome. Same-week cleanings.', body: 'Parkline Family Dental accepts most PPO plans. Find us in the directory.' },
+  { kind: 'psa', slot: 'psa-fire', ph: 'Fire drill photo', img: 'assets/ads/fire.jpg', credit: 'Photo: Jstark7 · CC BY-SA 4.0', eyebrow: 'Building notice', head: 'Fire drill Thursday, Oct 22 at 10:00 AM', body: 'Alarms will sound for about ten minutes. Exit by the nearest stairway and gather in the north parking lot.' },
+  { kind: 'tenant', slot: 'ad-hoververse', ph: 'SurfaceWare demo photo', img: 'assets/ads/hoververse.png', credit: '', eyebrow: 'Level 2 · Suite 250', head: 'Your wall called. It wants to be a UI.', body: 'See SurfaceWare™ touchless interfaces live at the HoverVerse Experience Center.' },
+  { kind: 'tenant', slot: 'ad-helix', ph: 'Helix lab photo', img: 'assets/ads/helix.jpg', credit: 'Photo: Diane A. Reid · Public domain', eyebrow: 'Level 1 · Suite 107', head: 'Now hiring lab technicians', body: 'Helix BioSystems is growing its research team here at Bent Tree.' },
+  { kind: 'psa', slot: 'psa-parking', ph: 'Parking photo', img: 'assets/ads/parking.jpg', credit: 'Photo: Tadeusz Hare · CC BY-SA 4.0', eyebrow: 'Parking', head: 'Garage level P1 closed Oct 26–28', body: 'Resurfacing work. Please use the surface visitor lot off Dallas Parkway.' },
+  { kind: 'tenant', slot: 'ad-wells', ph: 'Event photo', img: 'assets/ads/wells.jpg', credit: 'Photo: Breather · CC0', eyebrow: 'Conference Room 101 · Nov 5 · 7:30 AM', head: '2027 market outlook breakfast', body: 'Hosted by Wells Ridge Wealth Advisors. All tenants welcome.' }
+];
+const TABS = [{ id: 'all', label: 'All' }, { id: 'l1', label: 'Level 1' }, { id: 'l2', label: 'Level 2' }, { id: 'amen', label: 'Amenities' }];
+const ALL = [...DEST, ...AMEN];
+const byId = id => ALL.find(d => d.id === id);
+const plen = pts => pts.reduce((s, p, i) => i ? s + Math.hypot(p[0] - pts[i - 1][0], p[1] - pts[i - 1][1]) : 0, 0);
+
+class Component extends DCLogic {
+  state = { scale: 1, offX: 0, offY: 0, view: 'home', tab: 0, sel: null, routing: false, mapFloor: 1, drawn: false, ad: 0, now: new Date(), canUp: false, canDown: true, toast: '', toastOn: false };
+  pageRefs = TABS.map(() => React.createRef());
+  samples = []; lastGesture = 0; lastInput = Date.now(); adStart = Date.now(); ptr = null;
+
+  componentDidMount() {
+    this.fit = () => { const w = window.innerWidth, h = window.innerHeight, s = Math.min(w / 1920, h / 1080); this.setState({ scale: s, offX: (w - 1920 * s) / 2, offY: (h - 1080 * s) / 2 }); };
+    this.fit(); window.addEventListener('resize', this.fit);
+    this.onMove = e => this.handleMove(e.clientX, e.clientY);
+    this.onDown = e => { this.drag = { x0: e.clientX, y0: e.clientY, ly: e.clientY, moved: false }; this.touch(); };
+    this.onUp = e => { const d = this.drag; this.drag = null; if (!d) return; const s = this.state.scale; const dx = (e.clientX - d.x0) / s, dy = (e.clientY - d.y0) / s; this.dragMoved = d.moved; if (d.moved && Math.abs(dx) > 120 && Math.abs(dx) > 1.5 * Math.abs(dy)) this.swipe(dx < 0 ? 'left' : 'right'); if (d.moved) this.flagsSoon(); };
+    this.onClickCap = e => { if (this.dragMoved) { e.stopPropagation(); e.preventDefault(); this.dragMoved = false; } };
+    this.onWheel = e => { this.touch(); const el = this.curPage(); if (el && this.state.view === 'home') { el.scrollTop += e.deltaY; this.flags(); } };
+    this.onKey = e => { this.touch(); if (e.key === 'ArrowLeft') this.swipe('left'); else if (e.key === 'ArrowRight') this.swipe('right'); else if (e.key === 'ArrowDown') this.scroll(1, true); else if (e.key === 'ArrowUp') this.scroll(-1, true); };
+    window.addEventListener('mousemove', this.onMove); window.addEventListener('mousedown', this.onDown); window.addEventListener('mouseup', this.onUp);
+    window.addEventListener('click', this.onClickCap, true); window.addEventListener('wheel', this.onWheel, { passive: true }); window.addEventListener('keydown', this.onKey);
+    this.iv = setInterval(() => {
+      const now = Date.now(); const adMs = (this.props.adSeconds ?? 8) * 1000;
+      if (this.state.view === 'home' && now - this.adStart > adMs) { this.adStart = now; this.setState(s => ({ ad: (s.ad + 1) % ADS.length })); }
+      if (this.state.view !== 'home' && now - this.lastInput > (this.props.idleSeconds ?? 60) * 1000) this.goHome();
+      if (now - this.state.now.getTime() > 15000) this.setState({ now: new Date() });
+    }, 1000);
+    setTimeout(() => this.flags(), 300);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.fit); window.removeEventListener('mousemove', this.onMove); window.removeEventListener('mousedown', this.onDown); window.removeEventListener('mouseup', this.onUp);
+    window.removeEventListener('click', this.onClickCap, true); window.removeEventListener('wheel', this.onWheel); window.removeEventListener('keydown', this.onKey);
+    clearInterval(this.iv); clearTimeout(this.floorT); clearTimeout(this.toastT);
+  }
+  touch() { this.lastInput = Date.now(); }
+  handleMove(x, y) {
+    this.touch(); this.ptr = { x, y };
+    const s = this.state.scale;
+    if (this.drag) {
+      const dy = y - this.drag.ly; this.drag.ly = y;
+      if (Math.hypot(x - this.drag.x0, y - this.drag.y0) > 10) this.drag.moved = true;
+      if (this.drag.moved && Math.abs(y - this.drag.y0) > Math.abs(x - this.drag.x0)) { const el = this.curPage(); if (el) { el.scrollTop -= dy / s; this.flags(); } }
+      return;
+    }
+    if (!(this.props.waveGestures ?? true)) return;
+    const t = performance.now(); this.samples.push({ x, y, t });
+    while (this.samples.length && t - this.samples[0].t > 260) this.samples.shift();
+    const f = this.samples[0]; const dx = (x - f.x) / s, dy = (y - f.y) / s;
+    if (t - this.lastGesture < 800) return;
+    if (Math.abs(dx) > 460 && Math.abs(dx) > 2.2 * Math.abs(dy)) { this.lastGesture = t; this.samples = []; this.swipe(dx < 0 ? 'left' : 'right'); }
+    else if (Math.abs(dy) > 320 && Math.abs(dy) > 2.2 * Math.abs(dx)) { this.lastGesture = t; this.samples = []; this.scroll(dy > 0 ? 1 : -1, true); }
+  }
+  curPage() { return this.pageRefs[this.state.tab] && this.pageRefs[this.state.tab].current; }
+  flags() { const el = this.curPage(); if (!el) return; const canUp = el.scrollTop > 4, canDown = el.scrollTop + el.clientHeight < el.scrollHeight - 4; if (canUp !== this.state.canUp || canDown !== this.state.canDown) this.setState({ canUp, canDown }); }
+  flagsSoon() { setTimeout(() => this.flags(), 450); }
+  showToast(t) { clearTimeout(this.toastT); this.setState({ toast: t, toastOn: true }); this.toastT = setTimeout(() => this.setState({ toastOn: false }), 900); }
+  scroll(dir, toast) {
+    if (this.state.view !== 'home') return;
+    const el = this.curPage(); if (!el) return;
+    el.scrollTo({ top: el.scrollTop + dir * 360, behavior: 'smooth' }); this.flagsSoon();
+    if (toast) this.showToast(dir > 0 ? 'Scroll down' : 'Scroll up');
+  }
+  swipe(dir) {
+    const v = this.state.view;
+    if (v === 'home') {
+      const n = Math.max(0, Math.min(TABS.length - 1, this.state.tab + (dir === 'left' ? 1 : -1)));
+      if (n !== this.state.tab) { this.setTab(n); this.showToast(TABS[n].label); }
+    } else if (v === 'tenant' && dir === 'right') { this.goHome(); this.showToast('Back to directory'); }
+    else if (v === 'route' && dir === 'right') { this.backToTenant(); this.showToast('Back'); }
+  }
+  setTab(i) { this.touch(); this.setState({ tab: i }, () => { const el = this.curPage(); if (el) el.scrollTop = 0; this.flagsSoon(); }); }
+  open(id) { this.touch(); clearTimeout(this.floorT); const d = byId(id); this.setState({ view: 'tenant', sel: id, routing: false, mapFloor: d.level, drawn: false }); }
+  goHome() { clearTimeout(this.floorT); this.adStart = Date.now(); this.setState({ view: 'home', sel: null, routing: false, drawn: false }, () => this.flagsSoon()); }
+  backToTenant() { clearTimeout(this.floorT); const d = byId(this.state.sel); this.setState({ view: 'tenant', routing: false, drawn: false, mapFloor: d.level }); }
+  showFloor(f) { this.setState({ mapFloor: f, drawn: false }, () => setTimeout(() => this.setState({ drawn: true }), 80)); }
+  startRoute() {
+    this.touch(); clearTimeout(this.floorT); const d = byId(this.state.sel);
+    this.setState({ view: 'route', routing: true }); this.showFloor(1);
+    if (ROUTES[d.id] && ROUTES[d.id][2]) this.floorT = setTimeout(() => this.showFloor(2), 3200);
+  }
+
+  renderVals() {
+    const st = this.state; const d = st.sel ? byId(st.sel) : null;
+    const tile = x => x.mono.length === 3 || AMEN.includes(x) ? { bg: '#24343E', fg: '#69F09B' } : { bg: `oklch(0.80 0.11 ${HUE[x.id]})`, fg: '#0B1014' };
+    const item = x => ({ ...x, tileBg: tile(x).bg, tileFg: tile(x).fg, suiteLabel: /^\d/.test(x.suite) ? `Suite ${x.suite}` : x.suite, levelLabel: `Level ${x.level}`, open: () => this.open(x.id) });
+    const lists = [DEST, DEST.filter(x => x.level === 1), DEST.filter(x => x.level === 2), AMEN];
+    const pages = lists.map((l, i) => ({ ref: this.pageRefs[i], items: l.map(item), onScroll: () => this.flags() }));
+    const tabs = TABS.map((t, i) => ({ label: t.label, bg: i === st.tab ? '#EDF2F4' : '#18232B', fg: i === st.tab ? '#0B1014' : '#C9D3D8', ring: 'none', select: () => this.setTab(i) }));
+
+    const floor = st.mapFloor; const rooms = (floor === 1 ? F1 : F2).map(r => {
+      const selRoom = d && (r.d === d.id || (d.id === 'rest1' && r.d === 'rest1'));
+      const dest = r.d && byId(r.d); const isTen = dest && DEST.includes(dest);
+      let fill = r.s ? '#1C262D' : r.lobby ? '#202D35' : isTen ? `oklch(0.36 0.045 ${HUE[r.d]})` : '#26353F';
+      const hasNum = !!r.num && !!r.label;
+      const ly = r.y + r.h / 2 + (r.label ? r.fs * 0.35 : 8) - (hasNum ? 14 : 0);
+      return { ...r, sy: r.y + 14, fill: selRoom ? '#69F09B' : fill, side: selRoom ? '#3A8656' : '#0B1115', stroke: selRoom ? '#B5F8CE' : 'rgba(237,242,244,.10)', tc: selRoom ? '#0B1014' : '#EDF2F4', tc2: selRoom ? '#0B1014' : '#9AA8B1', lx: r.x + r.w / 2, ly, ny: r.label ? ly + 34 : ly, cxPx: (r.x + r.w / 2) * 1120 / 2100, cyPx: (r.y + r.h / 2) * 640 / 1200, wPx: r.w * 1120 / 2100 - 8, fsPx: Math.round(r.fs * 0.55), op: d && !selRoom ? 0.62 : 1 };
+    });
+    const pts = st.routing && d && ROUTES[d.id] ? ROUTES[d.id][floor] : null;
+    const len = pts ? Math.ceil(plen(pts)) + 4 : 1;
+    const pinRoom = d && (floor === 1 ? F1 : F2).find(r => r.d === d.id);
+    const multi = !!(d && ROUTES[d.id] && ROUTES[d.id][2]);
+    const total = d && ROUTES[d.id] ? plen(ROUTES[d.id][1]) + (ROUTES[d.id][2] ? plen(ROUTES[d.id][2]) : 0) : 0;
+    const ft = Math.round(total / 10 / 10) * 10; const mins = Math.max(1, Math.round(ft / 230 + (multi ? 1 : 0)));
+    const steps = d && STEPS[d.id] ? STEPS[d.id].map((s, i) => { const on = s[0] === floor; return { n: i + 1, text: s[1], bg: on ? '#18232B' : 'transparent', op: on ? 1 : 0.55, nBg: on ? '#69F09B' : '#24343E', nFg: on ? '#0B1014' : '#C9D3D8' }; }) : [];
+    const ads = ADS.map((a, i) => ({ ...a, isTenant: a.kind === 'tenant', isPsa: a.kind === 'psa', op: i === st.ad ? 1 : 0 }));
+    const page = st.view === 'home';
+    const now = st.now;
+    return {
+      scale: st.scale, offX: st.offX, offY: st.offY,
+      timeStr: now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }), dateStr: now.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }),
+      mediaOp: page ? 1 : 0, mapOp: page ? 0 : 1, ads, adDots: ADS.map((a, i) => ({ bg: i === st.ad ? '#69F09B' : 'rgba(237,242,244,.18)' })),
+      adCounter: ADS[st.ad].kind === 'psa' ? 'Building notice' : 'From your neighbors',
+      isHome: page, isTenant: st.view === 'tenant', isRoute: st.view === 'route', showLegend: (this.props.showLegend ?? true) && st.view !== 'route',
+      tabs, pages, trackX: -720 * st.tab, upOp: st.canUp ? 1 : 0, downOp: st.canDown ? 1 : 0,
+      goHome: () => this.goHome(), startRoute: () => this.startRoute(), backToTenant: () => this.backToTenant(), replay: () => this.startRoute(),
+      viewL1: () => { clearTimeout(this.floorT); this.showFloor(1); }, viewL2: () => { clearTimeout(this.floorT); this.showFloor(2); },
+      selName: d ? d.name : '', selCat: d ? d.cat : '', selMono: d ? d.mono : '', selTileBg: d ? tile(d).bg : '#24343E', selTileFg: d ? tile(d).fg : '#69F09B',
+      selSuite: d ? (/^\d/.test(d.suite) ? `Suite ${d.suite}` : d.suite) : '', selLevel: d ? `Level ${d.level}` : '', selDesc: d ? d.desc : '', selHours: d ? d.hours : '', selPhone: d ? d.phone : '',
+      routeSummary: d ? `About ${ft} ft · ${mins} min walk${multi ? ' · elevator to Level 2' : ''}` : '',
+      steps, multiFloor: multi, l1Bg: floor === 1 ? '#EDF2F4' : '#18232B', l1Fg: floor === 1 ? '#0B1014' : '#C9D3D8', l2Bg: floor === 2 ? '#EDF2F4' : '#18232B', l2Fg: floor === 2 ? '#0B1014' : '#C9D3D8',
+      rooms, tilt: this.props.mapTilt ?? 30,
+      routePts: pts ? pts.map(p => p.join(',')).join(' ') : '0,0', routeOp: pts ? 1 : 0, routeLen: len, routeOff: st.drawn ? 0 : len, routeTr: st.drawn ? 'stroke-dashoffset 1.8s ease-in-out' : 'none',
+      showKiosk: floor === 1, showElevStart: floor === 2 && st.routing, showPin: !!pinRoom, pinX: pinRoom ? pinRoom.x + pinRoom.w / 2 : 0, pinY: pinRoom ? pinRoom.y + pinRoom.h - 46 : 0,
+      mapFloorLabel: `Level ${floor}`, mapFloorSub: floor === 1 ? 'Ground floor · Main lobby' : 'Second floor',
+      mapDestName: d ? d.name : '', mapDestMeta: d ? `${/^\d/.test(d.suite) ? 'Suite ' + d.suite : d.suite} · Level ${d.level}` : '',
+      toastText: st.toast, toastOp: st.toastOn ? 1 : 0, toastScale: st.toastOn ? 1 : 0.9
+    };
+  }
+}
+</script>
+</body>
+</html>
