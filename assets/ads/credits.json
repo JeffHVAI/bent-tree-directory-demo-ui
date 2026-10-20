@@ -1,4 +1,34 @@
 {
+ "hover-os": {
+  "title": "Hover OS Headless Touchless Platform Interface",
+  "author": "HoverVerse AI",
+  "license": "Proprietary",
+  "page": "https://hoververseai.wixstudio.com/my-site/platform"
+ },
+ "hover-health": {
+  "title": "Hover Health Touchless Clinical EHR & Imaging Interface",
+  "author": "HoverVerse AI",
+  "license": "Proprietary",
+  "page": "https://hoververseai.wixstudio.com/my-site/platform"
+ },
+ "hover-aero": {
+  "title": "Hover Aero Transit & Aviation Passenger Display",
+  "author": "HoverVerse AI",
+  "license": "Proprietary",
+  "page": "https://hoververseai.wixstudio.com/my-site/platform"
+ },
+ "hover-engage": {
+  "title": "Hover Engage Living Heritage Museum Interactive Display",
+  "author": "HoverVerse AI",
+  "license": "Proprietary",
+  "page": "https://hoververseai.wixstudio.com/my-site/platform"
+ },
+ "hover-guide": {
+  "title": "Hover Guide 3D Multi-Floor Stacked Wayfinding Display",
+  "author": "HoverVerse AI",
+  "license": "Proprietary",
+  "page": "https://hoververseai.wixstudio.com/my-site/platform"
+ },
  "parkline": {
   "title": "File:Dentist Office IMG 2448 Oslo.JPG",
   "author": "Bjoertvedt",

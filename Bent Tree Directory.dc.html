@@ -54,7 +54,7 @@ a{color:#69F09B}a:hover{color:#EDF2F4}
     <div style="position:absolute;left:72px;right:72px;bottom:48px;display:flex;align-items:center;gap:24px;pointer-events:none">
       <div style="font-size:22px;font-weight:500;color:#9AA8B1;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">{{ adCounter }}</div>
       <div style="flex:1;display:flex;gap:10px">
-        <sc-for list="{{ adDots }}" as="d" hint-placeholder-count="6">
+        <sc-for list="{{ adDots }}" as="d" hint-placeholder-count="11">
           <div style="flex:1;height:5px;border-radius:3px;background:{{ d.bg }};transition:background .4s"></div>
         </sc-for>
       </div>
@@ -366,6 +366,11 @@ const STEPS = {
   lounge: [[1, 'Take the elevators just east of the lobby'], [2, 'Exit on Level 2 and turn right'], [2, 'Tenant Lounge 260 is on your right']]
 };
 const ADS = [
+  { kind: 'tenant', slot: 'ad-hover-os', ph: 'Hover OS platform photo', img: 'assets/ads/hover-os.jpg', credit: 'HoverVerse AI · Suite 250', eyebrow: 'Hover OS · Platform Runtime', head: 'The headless OS for touchless experiences.', body: 'Renders your existing web app directly on any surface and maps open-air gesture input to native web events with zero cloud latency and instant response.' },
+  { kind: 'tenant', slot: 'ad-hover-health', ph: 'Hover Health clinical photo', img: 'assets/ads/hover-health.jpg', credit: 'HoverVerse AI · Suite 250', eyebrow: 'Hover Health · Clinical Infrastructure', head: 'Sterile touchless interaction for clinical care.', body: 'Operate EHRs, diagnostic imaging, and bedside records contact-free in ORs, cleanrooms, and rehab suites without touching screens or spreading pathogens.' },
+  { kind: 'tenant', slot: 'ad-hover-aero', ph: 'Hover Aero aviation photo', img: 'assets/ads/hover-aero.jpg', credit: 'HoverVerse AI · Suite 250', eyebrow: 'Hover Aero · Transit & Aviation', head: 'Touchless passenger self-service & terminal displays.', body: 'Contact-free wayfinding, check-in, and flight information display systems built for high-traffic international airports and transportation hubs.' },
+  { kind: 'tenant', slot: 'ad-hover-engage', ph: 'Hover Engage gallery photo', img: 'assets/ads/hover-engage.jpg', credit: 'HoverVerse AI · Suite 250', eyebrow: 'Hover Engage · Living Heritage', head: 'Immersive engagement that disappears when idle.', body: 'Replaces static placards and bolted-on kiosks with projection-mapped interpretive media that awakens on visitor approach, preserving architectural sightlines.' },
+  { kind: 'tenant', slot: 'ad-hover-guide', ph: 'Hover Guide wayfinding photo', img: 'assets/ads/hover-guide.jpg', credit: 'HoverVerse AI · Suite 250', eyebrow: 'Hover Guide · 3D Wayfinding', head: 'Adaptive 3D wayfinding & real-time Blue Dot maps.', body: 'Projects responsive multi-floor routes and stacked architectural wayfinding directly onto walls, glass, and public surfaces with deep Mappedin integration.' },
   { kind: 'tenant', slot: 'ad-parkline', ph: 'Parkline Dental photo', img: 'assets/ads/parkline.jpg', credit: 'Photo: Bjoertvedt · CC BY-SA 3.0', eyebrow: 'Level 2 · Suite 220', head: 'New patients welcome. Same-week cleanings.', body: 'Parkline Family Dental accepts most PPO plans. Find us in the directory.' },
   { kind: 'psa', slot: 'psa-fire', ph: 'Fire drill photo', img: 'assets/ads/fire.jpg', credit: 'Photo: Jstark7 · CC BY-SA 4.0', eyebrow: 'Building notice', head: 'Fire drill Thursday, Oct 22 at 10:00 AM', body: 'Alarms will sound for about ten minutes. Exit by the nearest stairway and gather in the north parking lot.' },
   { kind: 'tenant', slot: 'ad-hoververse', ph: 'SurfaceWare demo photo', img: 'assets/ads/hoververse.png', credit: '', eyebrow: 'Level 2 · Suite 250', head: 'Your wall called. It wants to be a UI.', body: 'See SurfaceWare™ touchless interfaces live at the HoverVerse Experience Center.' },
@@ -484,7 +489,7 @@ class Component extends DCLogic {
       scale: st.scale, offX: st.offX, offY: st.offY,
       timeStr: now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }), dateStr: now.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }),
       mediaOp: page ? 1 : 0, mapOp: page ? 0 : 1, ads, adDots: ADS.map((a, i) => ({ bg: i === st.ad ? '#69F09B' : 'rgba(237,242,244,.18)' })),
-      adCounter: ADS[st.ad].kind === 'psa' ? 'Building notice' : 'From your neighbors',
+      adCounter: ADS[st.ad].kind === 'psa' ? 'Building notice' : ADS[st.ad].slot.startsWith('ad-hover') ? 'Featured Tenant · HoverVerse AI' : 'From your neighbors',
       isHome: page, isTenant: st.view === 'tenant', isRoute: st.view === 'route', showLegend: (this.props.showLegend ?? true) && st.view !== 'route',
       tabs, pages, trackX: -720 * st.tab, upOp: st.canUp ? 1 : 0, downOp: st.canDown ? 1 : 0,
       goHome: () => this.goHome(), startRoute: () => this.startRoute(), backToTenant: () => this.backToTenant(), replay: () => this.startRoute(),
