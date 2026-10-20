@@ -29,38 +29,32 @@ a{color:#69F09B}a:hover{color:#EDF2F4}
     <sc-for list="{{ ads }}" as="ad" hint-placeholder-count="1">
       <div style="position:absolute;inset:0;opacity:{{ ad.op }};transition:opacity 1s ease;display:flex;flex-direction:column">
         <sc-if value="{{ ad.isTenant }}" hint-placeholder-val="{{ true }}">
-          <div style="position:relative;height:640px;flex:none;background:#151E24">
+          <div style="position:relative;height:620px;flex:none;background:#151E24">
             <image-slot id="{{ ad.slot }}" shape="rect" placeholder="{{ ad.ph }}" src="{{ ad.img }}" credit="{{ ad.credit }}"></image-slot>
           </div>
-          <div style="flex:1;padding:50px 72px 110px;display:flex;flex-direction:column;gap:18px;background:#0B1014">
-            <div style="font-size:24px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#69F09B">{{ ad.eyebrow }}</div>
-            <div style="font-size:56px;line-height:1.06;font-weight:600;letter-spacing:-.02em;text-wrap:balance">{{ ad.head }}</div>
-            <div style="font-size:26px;line-height:1.4;color:#B9C5CC;text-wrap:pretty;max-width:960px">{{ ad.body }}</div>
-            <sc-if value="{{ ad.hasTenant }}" hint-placeholder-val="{{ true }}">
-              <div data-hv="1" onClick="{{ ad.openTenant }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:14px;height:68px;padding:0 34px;border-radius:34px;background:#69F09B;color:#0B1014;font-size:22px;font-weight:700;cursor:pointer;box-shadow:0 12px 32px rgba(0,0,0,.45);margin-top:4px;transition:background .2s,box-shadow .2s" style-hover="background:#8AF5B2;box-shadow:0 0 0 5px rgba(105,240,155,.35)">
-                {{ ad.ctaText }}
-                <svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:#0B1014;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-              </div>
-            </sc-if>
+          <div style="flex:1;padding:36px 72px 90px;display:flex;flex-direction:column;gap:14px;background:#0B1014">
+            <div style="font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#69F09B">{{ ad.eyebrow }}</div>
+            <div style="font-size:48px;line-height:1.14;font-weight:700;letter-spacing:-.02em;text-wrap:balance;max-width:1040px">{{ ad.head }}</div>
+            <div style="font-size:24px;line-height:1.45;color:#A4B3BC;text-wrap:pretty;max-width:960px">{{ ad.body }}</div>
           </div>
         </sc-if>
         <sc-if value="{{ ad.isPsa }}" hint-placeholder-val="{{ false }}">
-          <div style="position:relative;flex:1;padding:120px 88px 140px;display:flex;flex-direction:column;justify-content:flex-end;gap:32px;background:#0E161B;overflow:hidden">
+          <div style="position:relative;flex:1;padding:80px 88px 100px;display:flex;flex-direction:column;justify-content:flex-end;gap:20px;background:#0E161B;overflow:hidden">
             <div style="position:absolute;left:0;right:0;top:0;height:620px">
               <image-slot id="{{ ad.slot }}" shape="rect" placeholder="{{ ad.ph }}" src="{{ ad.img }}" credit="{{ ad.credit }}"></image-slot>
             </div>
             <div style="position:absolute;left:0;right:0;top:300px;height:330px;background:linear-gradient(rgba(14,22,27,0),#0E161B);pointer-events:none"></div>
-            <div style="position:relative;display:flex;align-items:center;gap:16px;font-size:26px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#69F09B">
-              <div style="width:18px;height:18px;border-radius:50%;background:#69F09B"></div>{{ ad.eyebrow }}
+            <div style="position:relative;display:flex;align-items:center;gap:14px;font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#69F09B">
+              <div style="width:16px;height:16px;border-radius:50%;background:#69F09B"></div>{{ ad.eyebrow }}
             </div>
-            <div style="position:relative;font-size:84px;line-height:1.02;font-weight:600;letter-spacing:-.03em;text-wrap:balance;max-width:1000px">{{ ad.head }}</div>
-            <div style="position:relative;font-size:32px;line-height:1.45;color:#C9D3D8;text-wrap:pretty;max-width:900px">{{ ad.body }}</div>
+            <div style="position:relative;font-size:68px;line-height:1.06;font-weight:700;letter-spacing:-.03em;text-wrap:balance;max-width:1000px">{{ ad.head }}</div>
+            <div style="position:relative;font-size:26px;line-height:1.45;color:#C9D3D8;text-wrap:pretty;max-width:900px">{{ ad.body }}</div>
           </div>
         </sc-if>
       </div>
     </sc-for>
-    <div style="position:absolute;left:72px;right:72px;bottom:48px;display:flex;align-items:center;gap:24px;pointer-events:none">
-      <div style="font-size:22px;font-weight:500;color:#9AA8B1;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">{{ adCounter }}</div>
+    <div style="position:absolute;left:72px;right:72px;bottom:34px;display:flex;align-items:center;gap:24px;pointer-events:none">
+      <div style="font-size:20px;font-weight:600;color:#9AA8B1;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">{{ adCounter }}</div>
       <div style="flex:1;display:flex;gap:10px">
         <sc-for list="{{ adDots }}" as="d" hint-placeholder-count="13">
           <div style="flex:1;height:5px;border-radius:3px;background:{{ d.bg }};transition:background .4s"></div>
@@ -100,15 +94,15 @@ a{color:#69F09B}a:hover{color:#EDF2F4}
               <circle cx="250" cy="1060" r="26" style="fill:#69F09B;transform-box:fill-box;transform-origin:center;animation:hvPulse 2s ease-out infinite"></circle>
               <circle cx="250" cy="1060" r="26" style="fill:#EDF2F4;stroke:#0B1014;stroke-width:6"></circle>
               <circle cx="250" cy="1060" r="12" style="fill:#3A8656"></circle>
-              <rect x="300" y="1036" width="250" height="50" rx="25" style="fill:#EDF2F4"></rect>
-              <text x="425" y="1069" style="font-family:Sora,sans-serif;font-size:24px;font-weight:700;fill:#0B1014;text-anchor:middle">You are here</text>
+              <rect x="135" y="982" width="230" height="46" rx="23" style="fill:#EDF2F4;stroke:#0B1014;stroke-width:3"></rect>
+              <text x="250" y="1013" style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;fill:#0B1014;text-anchor:middle">You are here</text>
             </g>
           </sc-if>
           <sc-if value="{{ showElevStart }}" hint-placeholder-val="{{ false }}">
             <g>
               <circle cx="560" cy="1000" r="24" style="fill:#EDF2F4;stroke:#0B1014;stroke-width:6"></circle>
-              <rect x="604" y="976" width="280" height="50" rx="25" style="fill:#EDF2F4"></rect>
-              <text x="744" y="1009" style="font-family:Sora,sans-serif;font-size:24px;font-weight:700;fill:#0B1014;text-anchor:middle">Exit elevator</text>
+              <rect x="600" y="976" width="220" height="46" rx="23" style="fill:#EDF2F4;stroke:#0B1014;stroke-width:3"></rect>
+              <text x="710" y="1007" style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;fill:#0B1014;text-anchor:middle">Exit elevator</text>
             </g>
           </sc-if>
           <sc-if value="{{ showPin }}" hint-placeholder-val="{{ false }}">
@@ -140,7 +134,7 @@ a{color:#69F09B}a:hover{color:#EDF2F4}
 <!-- RIGHT: interaction -->
 <div data-screen-label="Right interaction zone" style="position:relative;width:720px;height:1080px;flex:none;background:#111A20;box-shadow:-1px 0 0 rgba(237,242,244,.08);display:flex;flex-direction:column;overflow:hidden">
   <!-- Upper informational header (Passive viewing only · Zero reaching required) -->
-  <div style="padding:40px 48px 20px;display:flex;flex-direction:column;gap:20px;flex:none">
+  <div style="padding:36px 48px 16px;display:flex;flex-direction:column;gap:16px;flex:none">
     <div style="display:flex;align-items:center;justify-content:space-between">
       <img src="assets/HoverVerse_Logomark_Horizontal_Light.svg" alt="HoverVerse" style="height:32px;display:block">
       <div style="text-align:right">
@@ -148,10 +142,12 @@ a{color:#69F09B}a:hover{color:#EDF2F4}
         <div style="font-size:18px;color:#9AA8B1;margin-top:4px">{{ dateStr }}</div>
       </div>
     </div>
-    <div>
-      <div style="font-size:42px;font-weight:700;letter-spacing:-.02em;line-height:1.1">17230 Dallas Parkway</div>
-      <div style="font-size:22px;color:#9AA8B1;margin-top:6px">Bent Tree · Dallas, TX 75248</div>
-    </div>
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <div style="font-size:42px;font-weight:700;letter-spacing:-.02em;line-height:1.1">17230 Dallas Parkway</div>
+        <div style="font-size:22px;color:#9AA8B1;margin-top:6px">Bent Tree · Dallas, TX 75248</div>
+      </div>
+    </sc-if>
   </div>
 
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
@@ -159,81 +155,65 @@ a{color:#69F09B}a:hover{color:#EDF2F4}
       <!-- Centered Reachable Tabs Row (Comfort zone: chest height) -->
       <div style="padding:0 48px 16px;display:flex;gap:10px;flex:none">
         <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="4">
-          <div data-hv="1" onClick="{{ tb.select }}" style="height:62px;padding:0 26px;border-radius:31px;display:flex;align-items:center;font-size:24px;font-weight:600;background:{{ tb.bg }};color:{{ tb.fg }};box-shadow:{{ tb.ring }};transition:background .3s,color .3s,transform .12s;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">{{ tb.label }}</div>
+          <div data-hv="1" onClick="{{ tb.select }}" style="height:58px;padding:0 24px;border-radius:29px;display:flex;align-items:center;font-size:22px;font-weight:600;background:{{ tb.bg }};color:{{ tb.fg }};box-shadow:{{ tb.ring }};transition:background .3s,color .3s;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">{{ tb.label }}</div>
         </sc-for>
       </div>
 
-      <!-- Centered Scrollable Directory Pages -->
+      <!-- Centered Scrollable Directory Pages (No floating badges covering cards) -->
       <div style="position:relative;flex:1;min-height:0;overflow:hidden">
         <div style="display:flex;height:100%;width:2880px;transform:translateX({{ trackX }}px);transition:transform .5s cubic-bezier(.2,.8,.2,1)">
           <sc-for list="{{ pages }}" as="pg" hint-placeholder-count="1">
-            <div ref="{{ pg.ref }}" onScroll="{{ pg.onScroll }}" style="width:720px;height:100%;flex:none;overflow:hidden;box-sizing:border-box;padding:6px 48px 36px;display:flex;flex-direction:column;gap:12px">
+            <div ref="{{ pg.ref }}" onScroll="{{ pg.onScroll }}" style="width:720px;height:100%;flex:none;overflow-y:auto;overflow-x:hidden;box-sizing:border-box;padding:4px 48px 24px;display:flex;flex-direction:column;gap:12px">
               <sc-for list="{{ pg.items }}" as="it" hint-placeholder-count="5">
-                <div data-hv="1" onClick="{{ it.open }}" style="flex:none;height:108px;box-sizing:border-box;padding:0 24px 0 20px;border-radius:20px;background:#18232B;display:flex;align-items:center;gap:22px;cursor:pointer;transition:background .2s,box-shadow .2s,transform .12s" style-hover="background:#1F2E37;box-shadow:0 0 0 3px #69F09B inset">
-                  <div style="width:68px;height:68px;flex:none;border-radius:16px;background:{{ it.tileBg }};color:{{ it.tileFg }};display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700">{{ it.mono }}</div>
+                <div data-hv="1" onClick="{{ it.open }}" style="flex:none;height:104px;box-sizing:border-box;padding:0 24px 0 20px;border-radius:20px;background:#18232B;display:flex;align-items:center;gap:20px;cursor:pointer;transition:background .2s,box-shadow .2s" style-hover="background:#1F2E37;box-shadow:0 0 0 3px #69F09B inset">
+                  <div style="width:64px;height:64px;flex:none;border-radius:16px;background:{{ it.tileBg }};color:{{ it.tileFg }};display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700">{{ it.mono }}</div>
                   <div style="flex:1;min-width:0">
-                    <div style="font-size:28px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ it.name }}</div>
-                    <div style="font-size:22px;color:#9AA8B1;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ it.cat }}</div>
+                    <div style="font-size:26px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ it.name }}</div>
+                    <div style="font-size:20px;color:#9AA8B1;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ it.cat }}</div>
                   </div>
                   <div style="text-align:right;flex:none">
                     <div style="font-size:24px;font-weight:600">{{ it.suiteLabel }}</div>
-                    <div style="font-size:22px;color:#9AA8B1;margin-top:4px">{{ it.levelLabel }}</div>
+                    <div style="font-size:20px;color:#9AA8B1;margin-top:4px">{{ it.levelLabel }}</div>
                   </div>
                 </div>
               </sc-for>
             </div>
           </sc-for>
         </div>
-
-        <!-- Top scroll indicator (Wave DOWN to return up) -->
-        <div style="position:absolute;left:0;right:0;top:0;height:72px;background:linear-gradient(#111A20 60%,rgba(17,26,32,0));opacity:{{ upOp }};transition:opacity .3s;pointer-events:none;display:flex;align-items:center;justify-content:center;padding-top:4px">
-          <div style="font-size:20px;font-weight:600;color:#9AA8B1;display:flex;align-items:center;gap:10px;background:rgba(11,16,20,.88);padding:8px 22px;border-radius:22px;border:1px solid rgba(237,242,244,.12);backdrop-filter:blur(8px)">
-            <svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:#9AA8B1;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;animation:hvBounceDown 1.4s ease-in-out infinite"><path d="M12 4v16M5 13l7 7 7-7"></path></svg>
-            Wave DOWN to return up
-          </div>
-        </div>
-
-        <!-- Bottom scroll indicator (Wave UP to scroll down and reveal more) -->
-        <div style="position:absolute;left:0;right:0;bottom:0;height:100px;background:linear-gradient(rgba(17,26,32,0),#111A20 70%);opacity:{{ downOp }};transition:opacity .3s;pointer-events:none;display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;box-sizing:border-box">
-          <div style="font-size:22px;font-weight:600;color:#69F09B;display:flex;align-items:center;gap:12px;background:rgba(11,16,20,.90);padding:10px 26px;border-radius:26px;border:1px solid rgba(105,240,155,.3);backdrop-filter:blur(8px)">
-            <svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:#69F09B;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;animation:hvBounceUp 1.4s ease-in-out infinite"><path d="M12 20V4M5 11l7-7 7 7"></path></svg>
-            Wave UP to reveal more
-          </div>
-        </div>
       </div>
     </div>
   </sc-if>
 
   <sc-if value="{{ isTenant }}" hint-placeholder-val="{{ false }}">
-    <div style="flex:1;min-height:0;padding:16px 48px 24px;display:flex;flex-direction:column;justify-content:space-between">
+    <div style="flex:1;min-height:0;padding:12px 48px 24px;display:flex;flex-direction:column;justify-content:space-between">
       <!-- Upper informational section (eye-level passive viewing) -->
-      <div style="display:flex;flex-direction:column;gap:18px">
-        <div style="display:flex;align-items:center;gap:22px">
-          <div style="width:104px;height:104px;flex:none;border-radius:24px;background:{{ selTileBg }};color:{{ selTileFg }};display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:700">{{ selMono }}</div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:center;gap:20px">
+          <div style="width:96px;height:96px;flex:none;border-radius:22px;background:{{ selTileBg }};color:{{ selTileFg }};display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:700">{{ selMono }}</div>
           <div style="min-width:0">
-            <div style="font-size:40px;font-weight:700;line-height:1.1;letter-spacing:-.02em;text-wrap:balance">{{ selName }}</div>
-            <div style="font-size:22px;color:#9AA8B1;margin-top:6px">{{ selCat }}</div>
+            <div style="font-size:38px;font-weight:700;line-height:1.1;letter-spacing:-.02em;text-wrap:balance">{{ selName }}</div>
+            <div style="font-size:20px;color:#9AA8B1;margin-top:4px">{{ selCat }}</div>
           </div>
         </div>
         <div style="display:flex;gap:12px">
-          <div style="height:52px;padding:0 22px;border-radius:26px;background:#69F09B;color:#0B1014;display:flex;align-items:center;font-size:22px;font-weight:700">{{ selSuite }}</div>
-          <div style="height:52px;padding:0 22px;border-radius:26px;background:#18232B;color:#EDF2F4;display:flex;align-items:center;font-size:22px;font-weight:600">{{ selLevel }}</div>
+          <div style="height:48px;padding:0 20px;border-radius:24px;background:#69F09B;color:#0B1014;display:flex;align-items:center;font-size:20px;font-weight:700">{{ selSuite }}</div>
+          <div style="height:48px;padding:0 20px;border-radius:24px;background:#18232B;color:#EDF2F4;display:flex;align-items:center;font-size:20px;font-weight:600">{{ selLevel }}</div>
         </div>
-        <div style="font-size:24px;line-height:1.45;color:#C9D3D8;text-wrap:pretty">{{ selDesc }}</div>
-        <div style="display:grid;grid-template-columns:110px 1fr;row-gap:12px;font-size:22px;background:rgba(24,35,43,.5);padding:18px 22px;border-radius:18px;border:1px solid rgba(237,242,244,.06)">
+        <div style="font-size:22px;line-height:1.45;color:#C9D3D8;text-wrap:pretty">{{ selDesc }}</div>
+        <div style="display:grid;grid-template-columns:100px 1fr;row-gap:10px;font-size:20px;background:rgba(24,35,43,.5);padding:16px 20px;border-radius:16px;border:1px solid rgba(237,242,244,.06)">
           <div style="color:#9AA8B1">Hours</div><div>{{ selHours }}</div>
           <div style="color:#9AA8B1">Phone</div><div>{{ selPhone }}</div>
         </div>
       </div>
 
       <!-- Lower reachable action section (All actionable controls centered in lower comfort reach zone) -->
-      <div style="display:flex;flex-direction:column;gap:14px;padding-top:16px">
-        <div data-hv="1" onClick="{{ startRoute }}" style="height:96px;border-radius:28px;background:#69F09B;color:#0B1014;display:flex;align-items:center;justify-content:center;gap:16px;font-size:32px;font-weight:700;cursor:pointer;box-shadow:0 12px 32px rgba(105,240,155,.25);transition:background .2s,box-shadow .2s,transform .12s" style-hover="background:#8AF5B2;box-shadow:0 0 0 6px rgba(105,240,155,.3)">
+      <div style="display:flex;flex-direction:column;gap:12px;padding-top:14px">
+        <div data-hv="1" onClick="{{ startRoute }}" style="height:88px;border-radius:24px;background:#69F09B;color:#0B1014;display:flex;align-items:center;justify-content:center;gap:14px;font-size:28px;font-weight:700;cursor:pointer;box-shadow:0 12px 32px rgba(105,240,155,.2);transition:background .2s,box-shadow .2s" style-hover="background:#8AF5B2;box-shadow:0 0 0 5px rgba(105,240,155,.3)">
           Show me the way
-          <svg width="32" height="32" viewBox="0 0 24 24" style="fill:none;stroke:#0B1014;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          <svg width="28" height="28" viewBox="0 0 24 24" style="fill:none;stroke:#0B1014;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
         </div>
-        <div data-hv="1" onClick="{{ goHome }}" style="height:76px;border-radius:24px;background:#18232B;color:#EDF2F4;display:flex;align-items:center;justify-content:center;gap:12px;font-size:24px;font-weight:600;cursor:pointer;border:1px solid rgba(237,242,244,.1);transition:background .2s,box-shadow .2s" style-hover="background:#1F2E37;box-shadow:0 0 0 3px #69F09B inset">
-          <svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:#EDF2F4;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M15 5l-7 7 7 7"></path></svg>
+        <div data-hv="1" onClick="{{ goHome }}" style="height:68px;border-radius:22px;background:#18232B;color:#EDF2F4;display:flex;align-items:center;justify-content:center;gap:10px;font-size:22px;font-weight:600;cursor:pointer;border:1px solid rgba(237,242,244,.1);transition:background .2s" style-hover="background:#1F2E37;box-shadow:0 0 0 3px #69F09B inset">
+          <svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:#EDF2F4;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M15 5l-7 7 7 7"></path></svg>
           Back to Directory
         </div>
       </div>
@@ -241,37 +221,37 @@ a{color:#69F09B}a:hover{color:#EDF2F4}
   </sc-if>
 
   <sc-if value="{{ isRoute }}" hint-placeholder-val="{{ false }}">
-    <div style="flex:1;min-height:0;padding:16px 48px 24px;display:flex;flex-direction:column;justify-content:space-between">
+    <div style="flex:1;min-height:0;padding:12px 48px 24px;display:flex;flex-direction:column;justify-content:space-between">
       <!-- Upper guidance section (eye-level passive viewing) -->
-      <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:14px">
         <div>
-          <div style="font-size:20px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#69F09B">Wayfinding Route</div>
-          <div style="font-size:38px;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-top:6px;text-wrap:balance">{{ selName }}</div>
-          <div style="font-size:22px;color:#C9D3D8;margin-top:8px">{{ routeSummary }}</div>
+          <div style="font-size:18px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#69F09B">Wayfinding Route</div>
+          <div style="font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-top:4px;text-wrap:balance">{{ selName }}</div>
+          <div style="font-size:20px;color:#C9D3D8;margin-top:6px">{{ routeSummary }}</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;max-height:360px;overflow-y:auto">
           <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
-            <div style="flex:none;display:flex;align-items:flex-start;gap:16px;padding:12px 18px;border-radius:16px;background:{{ st.bg }};transition:background .4s,opacity .4s;opacity:{{ st.op }}">
-              <div style="width:40px;height:40px;flex:none;border-radius:50%;background:{{ st.nBg }};color:{{ st.nFg }};display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700">{{ st.n }}</div>
-              <div style="font-size:22px;line-height:1.35;padding-top:6px;text-wrap:pretty">{{ st.text }}</div>
+            <div style="flex:none;display:flex;align-items:flex-start;gap:14px;padding:12px 16px;border-radius:14px;background:{{ st.bg }};transition:background .4s,opacity .4s;opacity:{{ st.op }}">
+              <div style="width:36px;height:36px;flex:none;border-radius:50%;background:{{ st.nBg }};color:{{ st.nFg }};display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700">{{ st.n }}</div>
+              <div style="font-size:20px;line-height:1.35;padding-top:4px;text-wrap:pretty">{{ st.text }}</div>
             </div>
           </sc-for>
         </div>
       </div>
 
       <!-- Lower reachable action section (All actionable controls centered in lower comfort reach zone) -->
-      <div style="display:flex;flex-direction:column;gap:12px;padding-top:16px">
+      <div style="display:flex;flex-direction:column;gap:12px;padding-top:14px">
         <sc-if value="{{ multiFloor }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;gap:12px">
-            <div data-hv="1" onClick="{{ viewL1 }}" style="flex:1;height:68px;border-radius:20px;background:{{ l1Bg }};color:{{ l1Fg }};display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">Level 1</div>
-            <div data-hv="1" onClick="{{ viewL2 }}" style="flex:1;height:68px;border-radius:20px;background:{{ l2Bg }};color:{{ l2Fg }};display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">Level 2</div>
+            <div data-hv="1" onClick="{{ viewL1 }}" style="flex:1;height:62px;border-radius:18px;background:{{ l1Bg }};color:{{ l1Fg }};display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">Level 1</div>
+            <div data-hv="1" onClick="{{ viewL2 }}" style="flex:1;height:62px;border-radius:18px;background:{{ l2Bg }};color:{{ l2Fg }};display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;cursor:pointer" style-hover="box-shadow:0 0 0 3px #69F09B inset">Level 2</div>
           </div>
         </sc-if>
         <div style="display:flex;gap:12px">
-          <div data-hv="1" onClick="{{ replay }}" style="flex:1;height:76px;border-radius:22px;background:#18232B;color:#EDF2F4;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600;cursor:pointer;border:1px solid rgba(237,242,244,.1)" style-hover="box-shadow:0 0 0 3px #69F09B inset">Replay route</div>
-          <div data-hv="1" onClick="{{ backToTenant }}" style="flex:1;height:76px;border-radius:22px;background:#18232B;color:#EDF2F4;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600;cursor:pointer;border:1px solid rgba(237,242,244,.1)" style-hover="box-shadow:0 0 0 3px #69F09B inset">Tenant info</div>
+          <div data-hv="1" onClick="{{ replay }}" style="flex:1;height:68px;border-radius:20px;background:#18232B;color:#EDF2F4;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600;cursor:pointer;border:1px solid rgba(237,242,244,.1)" style-hover="box-shadow:0 0 0 3px #69F09B inset">Replay route</div>
+          <div data-hv="1" onClick="{{ backToTenant }}" style="flex:1;height:68px;border-radius:20px;background:#18232B;color:#EDF2F4;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600;cursor:pointer;border:1px solid rgba(237,242,244,.1)" style-hover="box-shadow:0 0 0 3px #69F09B inset">Tenant info</div>
         </div>
-        <div data-hv="1" onClick="{{ goHome }}" style="height:86px;border-radius:26px;background:#69F09B;color:#0B1014;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;cursor:pointer;box-shadow:0 12px 32px rgba(105,240,155,.25)" style-hover="background:#8AF5B2">
+        <div data-hv="1" onClick="{{ goHome }}" style="height:80px;border-radius:24px;background:#69F09B;color:#0B1014;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;cursor:pointer;box-shadow:0 12px 32px rgba(105,240,155,.2)" style-hover="background:#8AF5B2">
           Done · Return Home
         </div>
       </div>
@@ -280,17 +260,17 @@ a{color:#69F09B}a:hover{color:#EDF2F4}
 
   <!-- Centered Gesture Legend -->
   <sc-if value="{{ showLegend }}" hint-placeholder-val="{{ true }}">
-    <div style="flex:none;padding:18px 36px 26px;box-shadow:0 -1px 0 rgba(237,242,244,.08);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;background:rgba(11,16,20,.6)">
-      <div style="display:flex;align-items:center;gap:12px;font-size:18px;line-height:1.25;color:#C9D3D8">
-        <svg width="36" height="36" viewBox="0 0 40 40" style="flex:none;fill:none;stroke:#69F09B;stroke-width:2.5"><circle cx="20" cy="20" r="15"></circle><circle cx="20" cy="20" r="4" style="fill:#69F09B;stroke:none"></circle></svg>
-        Point to select (dwell 1s)
+    <div style="flex:none;padding:16px 36px 22px;box-shadow:0 -1px 0 rgba(237,242,244,.08);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;background:rgba(11,16,20,.6)">
+      <div style="display:flex;align-items:center;gap:10px;font-size:17px;line-height:1.25;color:#C9D3D8">
+        <svg width="32" height="32" viewBox="0 0 40 40" style="flex:none;fill:none;stroke:#69F09B;stroke-width:2.5"><circle cx="20" cy="20" r="14"></circle><circle cx="20" cy="20" r="4" style="fill:#69F09B;stroke:none"></circle></svg>
+        Point to select
       </div>
-      <div style="display:flex;align-items:center;gap:12px;font-size:18px;line-height:1.25;color:#C9D3D8">
-        <svg width="36" height="36" viewBox="0 0 40 40" style="flex:none;fill:none;stroke:#69F09B;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M20 4v32M13 11l7-7 7 7M13 29l7 7 7-7"></path></svg>
-        Wave UP = down · DOWN = up
+      <div style="display:flex;align-items:center;gap:10px;font-size:17px;line-height:1.25;color:#C9D3D8">
+        <svg width="32" height="32" viewBox="0 0 40 40" style="flex:none;fill:none;stroke:#69F09B;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M20 4v32M13 11l7-7 7 7M13 29l7 7 7-7"></path></svg>
+        Wave UP / DOWN to scroll
       </div>
-      <div style="display:flex;align-items:center;gap:12px;font-size:18px;line-height:1.25;color:#C9D3D8">
-        <svg width="36" height="36" viewBox="0 0 40 40" style="flex:none;fill:none;stroke:#69F09B;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M4 20h32M11 13l-7 7 7 7M29 13l7 7-7 7"></path></svg>
+      <div style="display:flex;align-items:center;gap:10px;font-size:17px;line-height:1.25;color:#C9D3D8">
+        <svg width="32" height="32" viewBox="0 0 40 40" style="flex:none;fill:none;stroke:#69F09B;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M4 20h32M11 13l-7 7 7 7M29 13l7 7-7 7"></path></svg>
         Wave sideways for tabs
       </div>
     </div>
@@ -301,15 +281,6 @@ a{color:#69F09B}a:hover{color:#EDF2F4}
     <div style="width:14px;height:14px;border-radius:50%;background:#69F09B"></div>{{ toastText }}
   </div>
 </div>
-</div>
-
-<!-- SurfaceWare Point-to-Click Dwell Cursor Overlay -->
-<div id="hv-dwell-cursor" style="position:absolute;left:0;top:0;opacity:0;pointer-events:none;z-index:999999;width:72px;height:72px;display:flex;align-items:center;justify-content:center;transition:opacity .15s ease">
-  <svg width="72" height="72" viewBox="0 0 72 72" style="transform:rotate(-90deg);overflow:visible">
-    <circle cx="36" cy="36" r="30" style="fill:rgba(11,16,20,0.72);stroke:rgba(237,242,244,0.22);stroke-width:4;backdrop-filter:blur(6px)"></circle>
-    <circle id="hv-dwell-ring" cx="36" cy="36" r="30" style="fill:none;stroke:#69F09B;stroke-width:5;stroke-linecap:round;stroke-dasharray:188.5;stroke-dashoffset:188.5;filter:drop-shadow(0 0 6px #69F09B)"></circle>
-    <circle cx="36" cy="36" r="5" style="fill:#69F09B"></circle>
-  </svg>
 </div>
 
 </div>
@@ -441,45 +412,14 @@ class Component extends DCLogic {
   state = { scale: 1, offX: 0, offY: 0, view: 'home', tab: 0, sel: null, routing: false, mapFloor: 1, drawn: false, ad: 0, now: new Date(), canUp: false, canDown: true, toast: '', toastOn: false };
   pageRefs = TABS.map(() => React.createRef());
   samples = []; lastGesture = 0; lastInput = Date.now(); adStart = Date.now(); ptr = null;
-  dwell = { target: null, startX: 0, startY: 0, curX: 0, curY: 0, startTime: 0, duration: 950, active: false };
 
   componentDidMount() {
     this.fit = () => { const w = window.innerWidth, h = window.innerHeight, s = Math.min(w / 1920, h / 1080); this.setState({ scale: s, offX: (w - 1920 * s) / 2, offY: (h - 1080 * s) / 2 }); };
     this.fit(); window.addEventListener('resize', this.fit);
 
-    // SurfaceWare Dwell Point-to-Click 60fps loop
-    const updateDwell = () => {
-      const curEl = document.getElementById('hv-dwell-cursor');
-      const ringEl = document.getElementById('hv-dwell-ring');
-      if (curEl && ringEl) {
-        if (this.dwell.active && this.dwell.target) {
-          const elapsed = performance.now() - this.dwell.startTime;
-          const pct = Math.min(1, Math.max(0, elapsed / this.dwell.duration));
-          curEl.style.transform = `translate(${this.dwell.curX}px, ${this.dwell.curY}px) translate(-50%, -50%) scale(${1 + pct * 0.14})`;
-          curEl.style.opacity = '1';
-          ringEl.style.strokeDashoffset = `${188.5 * (1 - pct)}`;
-          if (pct >= 1) {
-            const tgt = this.dwell.target;
-            this.cancelDwell();
-            if (tgt) {
-              tgt.style.transition = 'transform .12s ease';
-              tgt.style.transform = 'scale(0.97)';
-              setTimeout(() => { if (tgt) tgt.style.transform = ''; }, 160);
-              tgt.click();
-            }
-          }
-        } else {
-          curEl.style.opacity = '0';
-        }
-      }
-      this.dwellRaf = requestAnimationFrame(updateDwell);
-    };
-    this.dwellRaf = requestAnimationFrame(updateDwell);
-
     this.onMove = e => this.handleMove(e.clientX, e.clientY);
-    this.onDown = e => { this.cancelDwell(); this.drag = { x0: e.clientX, y0: e.clientY, ly: e.clientY, moved: false }; this.touch(); };
+    this.onDown = e => { this.drag = { x0: e.clientX, y0: e.clientY, ly: e.clientY, moved: false }; this.touch(); };
     this.onUp = e => {
-      this.cancelDwell();
       const d = this.drag; this.drag = null; if (!d) return;
       const s = this.state.scale; const dx = (e.clientX - d.x0) / s, dy = (e.clientY - d.y0) / s;
       this.dragMoved = d.moved;
@@ -487,17 +427,14 @@ class Component extends DCLogic {
       if (d.moved) this.flagsSoon();
     };
     this.onClickCap = e => {
-      this.cancelDwell();
       if (this.dragMoved) { e.stopPropagation(); e.preventDefault(); this.dragMoved = false; }
     };
     this.onWheel = e => {
-      this.cancelDwell();
       this.touch();
       const el = this.curPage();
       if (el && this.state.view === 'home') { el.scrollTop += e.deltaY; this.flags(); }
     };
     this.onKey = e => {
-      this.cancelDwell();
       this.touch();
       if (e.key === 'ArrowLeft') this.swipe('right');
       else if (e.key === 'ArrowRight') this.swipe('left');
@@ -532,14 +469,6 @@ class Component extends DCLogic {
     clearInterval(this.iv);
     clearTimeout(this.floorT);
     clearTimeout(this.toastT);
-    if (this.dwellRaf) cancelAnimationFrame(this.dwellRaf);
-  }
-
-  cancelDwell() {
-    this.dwell.active = false;
-    this.dwell.target = null;
-    const curEl = document.getElementById('hv-dwell-cursor');
-    if (curEl) curEl.style.opacity = '0';
   }
 
   touch() { this.lastInput = Date.now(); }
@@ -548,13 +477,8 @@ class Component extends DCLogic {
     this.touch();
     this.ptr = { x: clientX, y: clientY };
     const s = this.state.scale;
-    const cx = (clientX - this.state.offX) / s;
-    const cy = (clientY - this.state.offY) / s;
-    this.dwell.curX = cx;
-    this.dwell.curY = cy;
 
     if (this.drag) {
-      this.cancelDwell();
       const dy = clientY - this.drag.ly; this.drag.ly = clientY;
       if (Math.hypot(clientX - this.drag.x0, clientY - this.drag.y0) > 10) this.drag.moved = true;
       if (this.drag.moved && Math.abs(clientY - this.drag.y0) > Math.abs(clientX - this.drag.x0)) {
@@ -562,29 +486,6 @@ class Component extends DCLogic {
         if (el) { el.scrollTop -= dy / s; this.flags(); }
       }
       return;
-    }
-
-    // Point-to-click detection on SurfaceWare actionable items
-    const rawTarget = document.elementFromPoint(clientX, clientY);
-    const clickable = rawTarget ? rawTarget.closest('[data-hv="1"]') : null;
-
-    if (clickable) {
-      if (this.dwell.target !== clickable) {
-        this.dwell.target = clickable;
-        this.dwell.startX = cx;
-        this.dwell.startY = cy;
-        this.dwell.startTime = performance.now();
-        this.dwell.active = true;
-      } else {
-        const dist = Math.hypot(cx - this.dwell.startX, cy - this.dwell.startY);
-        if (dist > 45) {
-          this.dwell.startX = cx;
-          this.dwell.startY = cy;
-          this.dwell.startTime = performance.now();
-        }
-      }
-    } else {
-      if (this.dwell.active) this.cancelDwell();
     }
 
     if (!(this.props.waveGestures ?? true)) return;
@@ -598,12 +499,10 @@ class Component extends DCLogic {
     if (Math.abs(dx) > 440 && Math.abs(dx) > 2.0 * Math.abs(dy)) {
       this.lastGesture = t;
       this.samples = [];
-      this.cancelDwell();
       this.swipe(dx < 0 ? 'left' : 'right');
     } else if (Math.abs(dy) > 300 && Math.abs(dy) > 2.0 * Math.abs(dx)) {
       this.lastGesture = t;
       this.samples = [];
-      this.cancelDwell();
       // Wave UP (dy < 0): scroll content UP to expose stuff below the line
       // Wave DOWN (dy > 0): scroll content DOWN to expose stuff above the line
       this.scroll(dy < 0 ? 1 : -1, true);
@@ -646,9 +545,8 @@ class Component extends DCLogic {
   backToTenant() { clearTimeout(this.floorT); const d = byId(this.state.sel); this.setState({ view: 'tenant', routing: false, drawn: false, mapFloor: d.level }); }
   showFloor(f) { this.setState({ mapFloor: f, drawn: false }, () => setTimeout(() => this.setState({ drawn: true }), 80)); }
   startRoute() {
-    this.touch(); clearTimeout(this.floorT); const d = byId(this.state.sel);
+    this.touch(); clearTimeout(this.floorT);
     this.setState({ view: 'route', routing: true }); this.showFloor(1);
-    if (ROUTES[d.id] && ROUTES[d.id][2]) this.floorT = setTimeout(() => this.showFloor(2), 3200);
   }
 
   renderVals() {
@@ -674,24 +572,12 @@ class Component extends DCLogic {
     const total = d && ROUTES[d.id] ? plen(ROUTES[d.id][1]) + (ROUTES[d.id][2] ? plen(ROUTES[d.id][2]) : 0) : 0;
     const ft = Math.round(total / 10 / 10) * 10; const mins = Math.max(1, Math.round(ft / 230 + (multi ? 1 : 0)));
     const steps = d && STEPS[d.id] ? STEPS[d.id].map((s, i) => { const on = s[0] === floor; return { n: i + 1, text: s[1], bg: on ? '#18232B' : 'transparent', op: on ? 1 : 0.55, nBg: on ? '#69F09B' : '#24343E', nFg: on ? '#0B1014' : '#C9D3D8' }; }) : [];
-    const ads = ADS.map((a, i) => {
-      const tId = a.slot === 'ad-lifegenix' ? 'lifegenix' :
-                  a.slot === 'ad-trustup' ? 'trustup' :
-                  a.slot.startsWith('ad-hover') ? 'hoververse' :
-                  a.slot === 'ad-parkline' ? 'parkline' :
-                  a.slot === 'ad-helix' ? 'helix' :
-                  a.slot === 'ad-wells' ? 'wells' : null;
-      const dest = tId ? byId(tId) : null;
-      return {
-        ...a,
-        isTenant: a.kind === 'tenant',
-        isPsa: a.kind === 'psa',
-        hasTenant: !!dest,
-        ctaText: dest ? `View ${dest.name} →` : '',
-        openTenant: dest ? () => this.open(dest.id) : null,
-        op: i === st.ad ? 1 : 0
-      };
-    });
+    const ads = ADS.map((a, i) => ({
+      ...a,
+      isTenant: a.kind === 'tenant',
+      isPsa: a.kind === 'psa',
+      op: i === st.ad ? 1 : 0
+    }));
     const page = st.view === 'home';
     const now = st.now;
     return {
