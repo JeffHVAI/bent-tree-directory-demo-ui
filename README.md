@@ -11,6 +11,15 @@ Interactive commercial building directory and wayfinding demo UI designed for Ho
 - **Components & Scripts**:
   - `image-slot.js` — Custom web component for image rendering and placeholders
   - `support.js` — Data models, reactive bindings, and directory interactions
+- **SurfaceWare Touchless Ergonomics & Gestures**:
+  - **Anti-Gorilla Arm Architecture**: Eye-level upper region reserved for passive viewing (informational headers, media carousel, 3D map); all actionable controls (tabs, cards, action CTAs, floor selectors) centered in the lower comfort reach zone (waist-to-chest height) to prevent shoulder and arm fatigue.
+  - **Anti-Parallax Centering**: Actionable items padded comfortably away from display boundaries and extreme corners where optical sensor parallax and ray distortion peak.
+  - **Point-to-Click Dwell Engine**: Pointing and resting on any actionable card or button activates a glowing 60fps countdown reticle; after a calibrated ~950ms dwell, it automatically triggers a click with haptic/visual scale pop. Physical click and tap remain supported immediately.
+  - **Inverted Gesture Scrolling**:
+    - **Wave UP** (`dy < 0` / `ArrowDown`): Scrolls content upward to reveal items below the line.
+    - **Wave DOWN** (`dy > 0` / `ArrowUp`): Scrolls content downward to return to top.
+    - **Wave Sideways** (`dx` / `ArrowLeft`/`ArrowRight`): Switches category tabs or navigates back.
+  - **Direct Ad Engagement**: Lower actionable CTA buttons on media slides allow instant navigation into tenant wayfinding profiles directly from featured campaigns.
 - **Featured Tenants & Campaigns**:
   - **LifeGenix Institute (Anchor Tenant, Suite 100)**: Dallas's premier early detection center featuring full-body MRI & CT scans, non-surgical spine treatments, and cellular regenerative medicine
   - **TrustUp (Suite 120)**: Elite "Ring of Life" training center integrating asset protection and wealth building with metabolic health and peak fitness
