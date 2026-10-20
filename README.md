@@ -11,8 +11,10 @@ Interactive commercial building directory and wayfinding demo UI designed for Ho
 - **Components & Scripts**:
   - `image-slot.js` — Custom web component for image rendering and placeholders
   - `support.js` — Data models, reactive bindings, and directory interactions
-- **Featured Campaigns & Advertisements**:
-  - **Hover OS**: Headless operating system for touchless user experiences
+- **Featured Tenants & Campaigns**:
+  - **LifeGenix Institute (Anchor Tenant, Suite 100)**: Dallas's premier early detection center featuring full-body MRI & CT scans, non-surgical spine treatments, and cellular regenerative medicine
+  - **TrustUp (Suite 120)**: Elite "Ring of Life" training center integrating asset protection and wealth building with metabolic health and peak fitness
+  - **Hover OS (Suite 250)**: Headless operating system for touchless user experiences
   - **Hover Health**: Sterile touchless clinical workflows for healthcare, ORs, and cleanrooms
   - **Hover Aero**: Touchless passenger self-service, check-in, and flight information display systems
   - **Hover Engage**: Living Heritage projection-mapped interpretive exhibits that disappear when idle

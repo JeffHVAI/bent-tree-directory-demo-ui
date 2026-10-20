@@ -54,7 +54,7 @@ a{color:#69F09B}a:hover{color:#EDF2F4}
     <div style="position:absolute;left:72px;right:72px;bottom:48px;display:flex;align-items:center;gap:24px;pointer-events:none">
       <div style="font-size:22px;font-weight:500;color:#9AA8B1;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">{{ adCounter }}</div>
       <div style="flex:1;display:flex;gap:10px">
-        <sc-for list="{{ adDots }}" as="d" hint-placeholder-count="11">
+        <sc-for list="{{ adDots }}" as="d" hint-placeholder-count="13">
           <div style="flex:1;height:5px;border-radius:3px;background:{{ d.bg }};transition:background .4s"></div>
         </sc-for>
       </div>
@@ -270,8 +270,10 @@ a{color:#69F09B}a:hover{color:#EDF2F4}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;waveGestures&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Gestures&quot;},&quot;showLegend&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Gestures&quot;},&quot;mapTilt&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:30,&quot;min&quot;:0,&quot;max&quot;:50,&quot;step&quot;:1,&quot;unit&quot;:&quot;°&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Map&quot;},&quot;adSeconds&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:8,&quot;min&quot;:3,&quot;max&quot;:30,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;idleSeconds&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:60,&quot;min&quot;:15,&quot;max&quot;:300,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Content&quot;}}">
-const HUE = { prairie: 85, cedar: 50, lonestar: 230, helix: 340, mesa: 120, wells: 255, parkline: 190, redbird: 25, kestrel: 300, hoververse: 150 };
+const HUE = { lifegenix: 160, trustup: 290, prairie: 85, cedar: 50, lonestar: 230, helix: 340, mesa: 120, wells: 255, parkline: 190, redbird: 25, kestrel: 300, hoververse: 150 };
 const DEST = [
+  { id: 'lifegenix', name: 'LifeGenix Institute', mono: 'LG', cat: 'Anchor Tenant · Early Detection & Longevity', suite: '100', level: 1, hours: 'Mon–Fri · 8:00 AM – 5:00 PM', phone: '(972) 236-3333', desc: 'Dallas’s premier longevity center. Advanced full-body MRI & CT early detection scans, non-surgical back and spine treatments, and cellular regenerative medicine.' },
+  { id: 'trustup', name: 'TrustUp', mono: 'TU', cat: 'Wealth, Health & Fitness', suite: '120', level: 1, hours: 'Mon–Fri · 6:00 AM – 8:00 PM · Sat · 8:00 AM – 2:00 PM', phone: '(469) 502-3677', desc: 'The Ring of Life. Elite 3-round training integrating wealth protection, metabolic health, and peak physical conditioning. Founded by Dr. Cedric Brown.' },
   { id: 'cedar', name: 'Cedar & Co. Engineering', mono: 'CC', cat: 'Structural engineering', suite: '102', level: 1, hours: 'Mon–Fri · 7:30 AM – 5:30 PM', phone: '(972) 555-0102', desc: 'Structural and civil engineering for commercial and mixed-use projects across North Texas.' },
   { id: 'helix', name: 'Helix BioSystems', mono: 'HB', cat: 'Life sciences R&D', suite: '107', level: 1, hours: 'Mon–Fri · 8:00 AM – 6:00 PM', phone: '(972) 555-0107', desc: 'Diagnostics research and assay development. Visitors check in at the front desk inside the suite.' },
   { id: 'hoververse', name: 'HoverVerse AI', mono: 'HV', cat: 'SurfaceWare™ Experience Center', suite: '250', level: 2, hours: 'Mon–Fri · 9:00 AM – 5:00 PM', phone: '(972) 555-0250', desc: 'Touchless interface technology. See SurfaceWare™ turn walls, tables and displays into interfaces you control by pointing.' },
@@ -279,7 +281,7 @@ const DEST = [
   { id: 'lonestar', name: 'Lonestar Data Labs', mono: 'LD', cat: 'Data & cloud services', suite: '103', level: 1, hours: 'Mon–Fri · 8:00 AM – 5:00 PM', phone: '(972) 555-0103', desc: 'Managed infrastructure, data engineering and quality testing. Includes Lab 106 and QC 104.' },
   { id: 'mesa', name: 'Mesa Legal Group', mono: 'ML', cat: 'Business & real estate law', suite: '114–119', level: 1, hours: 'Mon–Fri · 8:30 AM – 5:30 PM', phone: '(972) 555-0115', desc: 'Commercial leasing, real estate and business law. Reception is at Suite 115.' },
   { id: 'parkline', name: 'Parkline Family Dental', mono: 'PD', cat: 'Dentistry', suite: '220', level: 2, hours: 'Mon–Thu · 8:00 AM – 5:00 PM · Fri · 8 – 1', phone: '(972) 555-0220', desc: 'General and cosmetic dentistry for the whole family. New patients welcome.' },
-  { id: 'prairie', name: 'Prairie Light Design Studio', mono: 'PL', cat: 'Architecture & interiors', suite: '100', level: 1, hours: 'Mon–Fri · 9:00 AM – 6:00 PM', phone: '(972) 555-0100', desc: 'Architecture and interior design studio. Our showroom is open to walk-in visitors during business hours.' },
+  { id: 'prairie', name: 'Prairie Light Design Studio', mono: 'PL', cat: 'Architecture & interiors', suite: '105', level: 1, hours: 'Mon–Fri · 9:00 AM – 6:00 PM', phone: '(972) 555-0100', desc: 'Architecture and interior design studio. Our showroom is open to walk-in visitors during business hours.' },
   { id: 'redbird', name: 'Redbird Insurance Partners', mono: 'RI', cat: 'Commercial insurance', suite: '230', level: 2, hours: 'Mon–Fri · 8:00 AM – 5:00 PM', phone: '(972) 555-0230', desc: 'Independent agency for commercial property, liability and employee benefits.' },
   { id: 'wells', name: 'Wells Ridge Wealth Advisors', mono: 'WR', cat: 'Financial planning', suite: '210', level: 2, hours: 'Mon–Fri · 8:30 AM – 5:00 PM', phone: '(972) 555-0210', desc: 'Fee-only financial planning and investment management for families and business owners.' }
 ];
@@ -292,13 +294,13 @@ const AMEN = [
   { id: 'lounge', name: 'Tenant Lounge', mono: '260', cat: 'Shared workspace', suite: '260', level: 2, hours: 'Mon–Fri · 7:00 AM – 7:00 PM', phone: '—', desc: 'Drop-in seating, phone booths and Wi-Fi for tenants and guests.' }
 ];
 const F1 = [
-  { d: 'prairie', x: 40, y: 40, w: 440, h: 440, label: 'Prairie Light', num: '100', fs: 34 },
+  { d: 'lifegenix', x: 40, y: 40, w: 440, h: 440, label: 'LifeGenix Institute', num: '100 · Anchor', fs: 30 },
   { d: 'conf', x: 500, y: 40, w: 340, h: 240, label: 'Conference', num: '101', fs: 30 },
   { d: 'cedar', x: 860, y: 40, w: 420, h: 440, label: 'Cedar & Co.', num: '102', fs: 34 },
   { d: 'lonestar', x: 1300, y: 40, w: 420, h: 300, label: 'Lonestar Data', num: '103', fs: 34 },
   { d: 'lonestar', x: 1740, y: 40, w: 320, h: 240, label: 'Quality Ctrl', num: '104', fs: 26 },
   { d: 'lonestar', x: 1740, y: 300, w: 320, h: 200, label: 'Lab', num: '106', fs: 26 },
-  { s: 1, x: 1300, y: 360, w: 200, h: 120, label: 'Storage', num: '105', fs: 22 },
+  { d: 'prairie', x: 1300, y: 360, w: 200, h: 120, label: 'Prairie Light', num: '105', fs: 20 },
   { d: 'cedar', x: 40, y: 500, w: 600, h: 400, label: 'Cedar & Co. Engineering', num: '102 · Open office', fs: 34 },
   { d: 'helix', x: 660, y: 540, w: 220, h: 200, label: 'Helix Bio', num: '107', fs: 28 },
   { d: 'rest1', x: 900, y: 540, w: 130, h: 200, label: 'Women', num: '108', fs: 22 },
@@ -308,7 +310,8 @@ const F1 = [
   { d: 'rest1', x: 1050, y: 650, w: 240, h: 90, label: 'Men', num: '110', fs: 22 },
   { d: 'stairs', x: 1310, y: 560, w: 110, h: 180, label: 'Stairs', num: '', fs: 22 },
   { d: 'break', x: 1440, y: 560, w: 220, h: 200, label: 'Break Room', num: '113', fs: 26 },
-  { d: 'mesa', x: 1000, y: 1000, w: 860, h: 160, label: 'Mesa Legal Group', num: '114–119', fs: 34 },
+  { d: 'trustup', x: 1000, y: 1000, w: 420, h: 160, label: 'TrustUp', num: '120', fs: 30 },
+  { d: 'mesa', x: 1440, y: 1000, w: 420, h: 160, label: 'Mesa Legal', num: '114–119', fs: 28 },
   { lobby: 1, x: 40, y: 1000, w: 420, h: 160, label: '', num: '', fs: 26 },
   { d: 'elev', x: 480, y: 1000, w: 160, h: 160, label: 'Elevators', num: '', fs: 24 }
 ];
@@ -330,11 +333,13 @@ const K = [[250, 1060], [250, 940]];
 const EL = [...K, [560, 940], [560, 1000]];
 const f2 = (...p) => [[560, 1000], [560, 940], ...p];
 const ROUTES = {
-  prairie: { 1: [...K, [250, 490]] },
+  lifegenix: { 1: [...K, [250, 490]] },
+  trustup: { 1: [...K, [1210, 940], [1210, 1000]] },
+  prairie: { 1: [...K, [1300, 940], [1300, 490], [1400, 490]] },
   cedar: { 1: [...K, [400, 940], [400, 905]] },
   lonestar: { 1: [...K, [1700, 940], [1700, 350], [1600, 350]] },
   helix: { 1: [...K, [770, 940], [770, 748]] },
-  mesa: { 1: [...K, [1430, 940], [1430, 1000]] },
+  mesa: { 1: [...K, [1650, 940], [1650, 1000]] },
   conf: { 1: [...K, [490, 940], [490, 290], [670, 290]] },
   break: { 1: [...K, [1550, 940], [1550, 768]] },
   rest1: { 1: [...K, [965, 940], [965, 748]] },
@@ -348,7 +353,9 @@ const ROUTES = {
   lounge: { 1: EL, 2: f2([1340, 940], [1340, 1000]) }
 };
 const STEPS = {
-  prairie: [[1, 'Leave the lobby heading north'], [1, 'Continue straight through the open office'], [1, 'Prairie Light Design Studio, Suite 100, is straight ahead']],
+  lifegenix: [[1, 'Leave the lobby heading north'], [1, 'Continue straight past the courtyard'], [1, 'LifeGenix Institute, Suite 100, is straight ahead']],
+  trustup: [[1, 'Leave the lobby and turn right on the main corridor'], [1, 'Walk east past the elevators and restrooms'], [1, 'TrustUp facility, Suite 120, is on your right']],
+  prairie: [[1, 'Leave the lobby and turn right on the main corridor'], [1, 'Walk past the restrooms and turn left before the lab'], [1, 'Prairie Light Design Studio, Suite 105, is ahead']],
   cedar: [[1, 'Leave the lobby heading north'], [1, 'Turn right at the main corridor'], [1, 'Cedar & Co. reception, Suite 102, is on your left']],
   lonestar: [[1, 'Leave the lobby and turn right on the main corridor'], [1, 'Walk past the restrooms and break room'], [1, 'Turn left before the lab and walk north'], [1, 'Lonestar Data Labs, Suite 103, is on your left']],
   helix: [[1, 'Leave the lobby and turn right on the main corridor'], [1, 'Turn left at the center core'], [1, 'Helix BioSystems, Suite 107, is ahead']],
@@ -366,7 +373,9 @@ const STEPS = {
   lounge: [[1, 'Take the elevators just east of the lobby'], [2, 'Exit on Level 2 and turn right'], [2, 'Tenant Lounge 260 is on your right']]
 };
 const ADS = [
+  { kind: 'tenant', slot: 'ad-lifegenix', ph: 'LifeGenix Institute scan photo', img: 'assets/ads/lifegenix.jpg', credit: 'LifeGenix Institute · Suite 100', eyebrow: 'Suite 100 · Anchor Tenant', head: 'Early detection scans & regenerative medicine.', body: 'Advanced full-body MRI & CT imaging, non-surgical spine care, and cellular therapies. Protect your future through proactive prevention at Dallas’s premier longevity center.' },
   { kind: 'tenant', slot: 'ad-hover-os', ph: 'Hover OS platform photo', img: 'assets/ads/hover-os.jpg', credit: 'HoverVerse AI · Suite 250', eyebrow: 'Hover OS · Platform Runtime', head: 'The headless OS for touchless experiences.', body: 'Renders your existing web app directly on any surface and maps open-air gesture input to native web events with zero cloud latency and instant response.' },
+  { kind: 'tenant', slot: 'ad-trustup', ph: 'TrustUp Ring of Life photo', img: 'assets/ads/trustup.jpg', credit: 'TrustUp · Suite 120', eyebrow: 'Suite 120 · Wealth · Health · Fitness', head: 'Train to win in the Ring of Life.', body: 'Elite 3-round training combining asset protection and wealth building with metabolic health and peak fitness. Start your fight at Suite 120.' },
   { kind: 'tenant', slot: 'ad-hover-health', ph: 'Hover Health clinical photo', img: 'assets/ads/hover-health.jpg', credit: 'HoverVerse AI · Suite 250', eyebrow: 'Hover Health · Clinical Infrastructure', head: 'Sterile touchless interaction for clinical care.', body: 'Operate EHRs, diagnostic imaging, and bedside records contact-free in ORs, cleanrooms, and rehab suites without touching screens or spreading pathogens.' },
   { kind: 'tenant', slot: 'ad-hover-aero', ph: 'Hover Aero aviation photo', img: 'assets/ads/hover-aero.jpg', credit: 'HoverVerse AI · Suite 250', eyebrow: 'Hover Aero · Transit & Aviation', head: 'Touchless passenger self-service & terminal displays.', body: 'Contact-free wayfinding, check-in, and flight information display systems built for high-traffic international airports and transportation hubs.' },
   { kind: 'tenant', slot: 'ad-hover-engage', ph: 'Hover Engage gallery photo', img: 'assets/ads/hover-engage.jpg', credit: 'HoverVerse AI · Suite 250', eyebrow: 'Hover Engage · Living Heritage', head: 'Immersive engagement that disappears when idle.', body: 'Replaces static placards and bolted-on kiosks with projection-mapped interpretive media that awakens on visitor approach, preserving architectural sightlines.' },
@@ -489,7 +498,7 @@ class Component extends DCLogic {
       scale: st.scale, offX: st.offX, offY: st.offY,
       timeStr: now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }), dateStr: now.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }),
       mediaOp: page ? 1 : 0, mapOp: page ? 0 : 1, ads, adDots: ADS.map((a, i) => ({ bg: i === st.ad ? '#69F09B' : 'rgba(237,242,244,.18)' })),
-      adCounter: ADS[st.ad].kind === 'psa' ? 'Building notice' : ADS[st.ad].slot.startsWith('ad-hover') ? 'Featured Tenant · HoverVerse AI' : 'From your neighbors',
+      adCounter: ADS[st.ad].kind === 'psa' ? 'Building notice' : ADS[st.ad].slot === 'ad-lifegenix' ? 'Anchor Tenant · LifeGenix' : ADS[st.ad].slot === 'ad-trustup' ? 'Featured Tenant · TrustUp' : ADS[st.ad].slot.startsWith('ad-hover') ? 'Featured Tenant · HoverVerse AI' : 'From your neighbors',
       isHome: page, isTenant: st.view === 'tenant', isRoute: st.view === 'route', showLegend: (this.props.showLegend ?? true) && st.view !== 'route',
       tabs, pages, trackX: -720 * st.tab, upOp: st.canUp ? 1 : 0, downOp: st.canDown ? 1 : 0,
       goHome: () => this.goHome(), startRoute: () => this.startRoute(), backToTenant: () => this.backToTenant(), replay: () => this.startRoute(),
