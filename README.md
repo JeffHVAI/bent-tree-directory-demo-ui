@@ -12,8 +12,8 @@ Interactive commercial building directory and wayfinding demo UI designed for Ho
   - `image-slot.js` — Custom web component for image rendering and placeholders
   - `support.js` — Data models, reactive bindings, and directory interactions
 - **SurfaceWare Touchless Ergonomics & Gestures**:
-  - **Anti-Gorilla Arm Architecture**: Eye-level upper region reserved for passive viewing (informational headers, media carousel, 3D map); all actionable controls (tabs, cards, action CTAs, floor selectors) centered in the lower comfort reach zone (waist-to-chest height) to prevent shoulder and arm fatigue.
-  - **Anti-Parallax Centering**: Actionable items padded comfortably away from display boundaries and extreme corners where optical sensor parallax and ray distortion peak.
+  - **Anti-Gorilla Arm Architecture**: Eye-level upper region reserved for passive viewing (informational headers, media carousel, 3D map); all actionable controls (tabs, directory cards, "Show me the way" primary CTA, floor selectors) centered in the natural chest/heart mid-section directly in front of the standing user (right interaction zone) to prevent shoulder elevation fatigue.
+  - **Anti-Parallax Centering**: Actionable controls kept centered at heart height and safely away from display edges or the extreme bottom floor/waist boundaries where optical sensor ray angles and parallax distortion peak.
   - **Point-to-Click Dwell Engine**: Pointing and resting on any actionable card or button activates a glowing 60fps countdown reticle; after a calibrated ~950ms dwell, it automatically triggers a click with haptic/visual scale pop. Physical click and tap remain supported immediately.
   - **Inverted Gesture Scrolling**:
     - **Wave UP** (`dy < 0` / `ArrowDown`): Scrolls content upward to reveal items below the line.
